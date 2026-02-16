@@ -64,9 +64,11 @@ export function Navigation() {
       <div className="container h-full flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center">
-          <div className="text-white text-2xl font-bold">
-            {language === "ar" ? "مأرب للتأمين" : "MAREB INSURANCE"}
-          </div>
+          <img
+            src="/logo.jpg"
+            alt="Mareb Insurance"
+            className="h-16 w-auto object-contain"
+          />
         </Link>
 
         {/* Desktop Navigation */}
