@@ -4,17 +4,36 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
+import { Navigation } from "./components/Navigation";
+import { Footer } from "./components/Footer";
 import Home from "./pages/Home";
+import Contact from "./pages/Contact";
+import AboutUs from "./pages/AboutUs";
+import InsuranceDetail from "./pages/InsuranceDetail";
 
 function Router() {
-  // make sure to consider if you need authentication for certain routes
   return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+    <div className="min-h-screen flex flex-col">
+      <Navigation />
+      <main className="flex-1" style={{ marginTop: "90px" }}>
+        <Switch>
+          <Route path={"/"} component={Home} />
+          <Route path={"/contact"} component={Contact} />
+          <Route path={"/about/who-we-are"} component={AboutUs} />
+          <Route path={"/insurance/health"}>{() => <InsuranceDetail type="health" />}</Route>
+          <Route path={"/insurance/car"}>{() => <InsuranceDetail type="car" />}</Route>
+          <Route path={"/insurance/marine"}>{() => <InsuranceDetail type="marine" />}</Route>
+          <Route path={"/insurance/engineering"}>{() => <InsuranceDetail type="engineering" />}</Route>
+          <Route path={"/insurance/energy"}>{() => <InsuranceDetail type="energy" />}</Route>
+          <Route path={"/insurance/takaful"}>{() => <InsuranceDetail type="takaful" />}</Route>
+          <Route path={"/404"} component={NotFound} />
+          {/* Final fallback route */}
+          <Route component={NotFound} />
+        </Switch>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
@@ -26,14 +45,13 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+      <ThemeProvider defaultTheme="light">
+        <LanguageProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </LanguageProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
