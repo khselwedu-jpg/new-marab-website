@@ -11,6 +11,9 @@ import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import AboutUs from "./pages/AboutUs";
 import InsuranceDetail from "./pages/InsuranceDetail";
+import AdminDashboard from "./pages/admin/Dashboard";
+import HeroSlidesPage from "./pages/admin/HeroSlides";
+import ContactMessagesPage from "./pages/admin/ContactMessages";
 
 function Router() {
   return (
@@ -27,6 +30,9 @@ function Router() {
           <Route path={"/insurance/engineering"}>{() => <InsuranceDetail type="engineering" />}</Route>
           <Route path={"/insurance/energy"}>{() => <InsuranceDetail type="energy" />}</Route>
           <Route path={"/insurance/takaful"}>{() => <InsuranceDetail type="takaful" />}</Route>
+          <Route path={"/admin"} component={AdminDashboard} />
+          <Route path={"/admin/hero-slides"} component={HeroSlidesPage} />
+          <Route path={"/admin/contacts"} component={ContactMessagesPage} />
           <Route path={"/404"} component={NotFound} />
           {/* Final fallback route */}
           <Route component={NotFound} />

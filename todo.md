@@ -88,3 +88,21 @@
 - [x] Add logo to navigation bar
 - [x] Add logo to footer
 - [x] Ensure logo displays correctly on mobile
+
+## Admin Control Panel - Dynamic CMS
+- [x] Design database schema for all content types
+- [x] Create admin authentication and role-based access
+- [x] Build admin dashboard layout with sidebar navigation
+- [x] Hero slider management (add/edit/delete slides)
+- [ ] About section content editor
+- [ ] Why Us section management (features with icons)
+- [ ] Insurance types CRUD (create/read/update/delete)
+- [ ] Statistics counter management
+- [ ] Partners management with logo upload
+- [ ] Branch locations CRUD with map integration
+- [ ] News and events management
+- [x] Contact form submissions viewer
+- [ ] Company settings (contact info, social media)
+- [ ] Media library for image uploads
+- [ ] Update frontend to fetch from database
+- [x] Seed initial data from current static content
