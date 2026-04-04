@@ -14,9 +14,36 @@ import InsuranceDetail from "./pages/InsuranceDetail";
 import AdminDashboard from "./pages/admin/Dashboard";
 import HeroSlidesPage from "./pages/admin/HeroSlides";
 import ContactMessagesPage from "./pages/admin/ContactMessages";
+import InsuranceTypesPage from "./pages/admin/InsuranceTypes";
+import StatisticsPage from "./pages/admin/Statistics";
+import PartnersPage from "./pages/admin/Partners";
+import BranchesPage from "./pages/admin/Branches";
+import NewsPage from "./pages/admin/News";
+import WhyUsPage from "./pages/admin/WhyUs";
+import AboutContentPage from "./pages/admin/AboutContent";
+import SiteSettingsPage from "./pages/admin/SiteSettings";
+import LoginPage from "./pages/Login";
 
 function Router() {
   return (
+    <Switch>
+      {/* Login page - no navbar/footer */}
+      <Route path="/login" component={LoginPage} />
+      {/* Admin pages - no public navbar/footer */}
+      <Route path="/admin" component={AdminDashboard} />
+      <Route path="/admin/hero-slides" component={HeroSlidesPage} />
+      <Route path="/admin/contacts" component={ContactMessagesPage} />
+      <Route path="/admin/insurance" component={InsuranceTypesPage} />
+      <Route path="/admin/statistics" component={StatisticsPage} />
+      <Route path="/admin/partners" component={PartnersPage} />
+      <Route path="/admin/branches" component={BranchesPage} />
+      <Route path="/admin/news" component={NewsPage} />
+      <Route path="/admin/why-us" component={WhyUsPage} />
+      <Route path="/admin/about" component={AboutContentPage} />
+      <Route path="/admin/settings" component={SiteSettingsPage} />
+      {/* All other pages with navbar/footer */}
+      <Route>
+        {() => (
     <div className="min-h-screen flex flex-col">
       <Navigation />
       <main className="flex-1" style={{ marginTop: "90px" }}>
@@ -30,9 +57,6 @@ function Router() {
           <Route path={"/insurance/engineering"}>{() => <InsuranceDetail type="engineering" />}</Route>
           <Route path={"/insurance/energy"}>{() => <InsuranceDetail type="energy" />}</Route>
           <Route path={"/insurance/takaful"}>{() => <InsuranceDetail type="takaful" />}</Route>
-          <Route path={"/admin"} component={AdminDashboard} />
-          <Route path={"/admin/hero-slides"} component={HeroSlidesPage} />
-          <Route path={"/admin/contacts"} component={ContactMessagesPage} />
           <Route path={"/404"} component={NotFound} />
           {/* Final fallback route */}
           <Route component={NotFound} />
@@ -40,13 +64,11 @@ function Router() {
       </main>
       <Footer />
     </div>
+        )}
+      </Route>
+    </Switch>
   );
 }
-
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
 function App() {
   return (

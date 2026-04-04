@@ -61,7 +61,7 @@ export const adminRouter = router({
     };
   }),
 
-  // Hero Slides
+  // Hero Slides - Full CRUD
   heroSlides: router({
     list: adminProcedure.query(async () => {
       const db = await getDb();
@@ -89,48 +89,150 @@ export const adminRouter = router({
     }),
   }),
 
-  // Insurance Types
+  // Insurance Types - Full CRUD
   insuranceTypes: router({
     list: adminProcedure.query(async () => {
       const db = await getDb();
       if (!db) return [];
       return await db.select().from(insuranceTypes).orderBy(insuranceTypes.displayOrder);
     }),
+    create: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.insert(insuranceTypes).values(input);
+      return { success: true };
+    }),
+    update: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const { id, ...data } = input;
+      await db.update(insuranceTypes).set(data).where(eq(insuranceTypes.id, id));
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.delete(insuranceTypes).where(eq(insuranceTypes.id, input.id));
+      return { success: true };
+    }),
   }),
 
-  // Statistics
+  // Statistics - Full CRUD
   statistics: router({
     list: adminProcedure.query(async () => {
       const db = await getDb();
       if (!db) return [];
       return await db.select().from(statistics).orderBy(statistics.displayOrder);
     }),
+    create: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.insert(statistics).values(input);
+      return { success: true };
+    }),
+    update: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const { id, ...data } = input;
+      await db.update(statistics).set(data).where(eq(statistics.id, id));
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.delete(statistics).where(eq(statistics.id, input.id));
+      return { success: true };
+    }),
   }),
 
-  // Partners
+  // Partners - Full CRUD
   partners: router({
     list: adminProcedure.query(async () => {
       const db = await getDb();
       if (!db) return [];
       return await db.select().from(partners).orderBy(partners.displayOrder);
     }),
+    create: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.insert(partners).values(input);
+      return { success: true };
+    }),
+    update: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const { id, ...data } = input;
+      await db.update(partners).set(data).where(eq(partners.id, id));
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.delete(partners).where(eq(partners.id, input.id));
+      return { success: true };
+    }),
   }),
 
-  // Branches
+  // Branches - Full CRUD
   branches: router({
     list: adminProcedure.query(async () => {
       const db = await getDb();
       if (!db) return [];
       return await db.select().from(branches).orderBy(branches.displayOrder);
     }),
+    create: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.insert(branches).values(input);
+      return { success: true };
+    }),
+    update: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const { id, ...data } = input;
+      await db.update(branches).set(data).where(eq(branches.id, id));
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.delete(branches).where(eq(branches.id, input.id));
+      return { success: true };
+    }),
   }),
 
-  // News
+  // News - Full CRUD
   news: router({
     list: adminProcedure.query(async () => {
       const db = await getDb();
       if (!db) return [];
       return await db.select().from(news).orderBy(news.publishDate);
+    }),
+    create: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const data = { ...input };
+      if (data.publishDate && typeof data.publishDate === 'string') {
+        data.publishDate = new Date(data.publishDate);
+      }
+      await db.insert(news).values(data);
+      return { success: true };
+    }),
+    update: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const { id, ...data } = input;
+      if (data.publishDate && typeof data.publishDate === 'string') {
+        data.publishDate = new Date(data.publishDate);
+      }
+      await db.update(news).set(data).where(eq(news.id, id));
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.delete(news).where(eq(news.id, input.id));
+      return { success: true };
     }),
   }),
 
@@ -155,30 +257,87 @@ export const adminRouter = router({
     }),
   }),
 
-  // Why Us Features
+  // Why Us Features - Full CRUD
   whyUs: router({
     list: adminProcedure.query(async () => {
       const db = await getDb();
       if (!db) return [];
       return await db.select().from(whyUsFeatures).orderBy(whyUsFeatures.displayOrder);
     }),
+    create: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.insert(whyUsFeatures).values(input);
+      return { success: true };
+    }),
+    update: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const { id, ...data } = input;
+      await db.update(whyUsFeatures).set(data).where(eq(whyUsFeatures.id, id));
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.delete(whyUsFeatures).where(eq(whyUsFeatures.id, input.id));
+      return { success: true };
+    }),
   }),
 
-  // About Content
+  // About Content - Full CRUD
   about: router({
     list: adminProcedure.query(async () => {
       const db = await getDb();
       if (!db) return [];
       return await db.select().from(aboutContent);
     }),
+    create: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.insert(aboutContent).values(input);
+      return { success: true };
+    }),
+    update: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const { id, ...data } = input;
+      await db.update(aboutContent).set(data).where(eq(aboutContent.id, id));
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.delete(aboutContent).where(eq(aboutContent.id, input.id));
+      return { success: true };
+    }),
   }),
 
-  // Site Settings
+  // Site Settings - Upsert
   settings: router({
     list: adminProcedure.query(async () => {
       const db = await getDb();
       if (!db) return [];
       return await db.select().from(siteSettings);
+    }),
+    upsert: adminProcedure.input((val: any) => val).mutation(async ({ input }) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      // input is array of { key, valueAr, valueEn, category }
+      const items = Array.isArray(input) ? input : [input];
+      for (const item of items) {
+        const existing = await db.select().from(siteSettings).where(eq(siteSettings.key, item.key));
+        if (existing.length > 0) {
+          await db.update(siteSettings).set({
+            valueAr: item.valueAr,
+            valueEn: item.valueEn,
+            category: item.category || "general",
+          }).where(eq(siteSettings.key, item.key));
+        } else {
+          await db.insert(siteSettings).values(item);
+        }
+      }
+      return { success: true };
     }),
   }),
 });

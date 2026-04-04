@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, LogIn, LogOut, User } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { getLoginUrl } from "@/const";
 
 export function Navigation() {
   const { language, toggleLanguage, t } = useLanguage();
+  const { user, logout } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -203,6 +206,38 @@ export function Navigation() {
           >
             {language === "ar" ? "EN" : "AR"}
           </Button>
+
+          {/* Login/User Button */}
+          {user ? (
+            <div className="flex items-center gap-2">
+              {user.role === "admin" && (
+                <Link href="/admin">
+                  <Button size="sm" className="bg-secondary text-primary hover:bg-secondary/90 font-semibold">
+                    <User className="w-4 h-4 mr-1" />
+                    {language === "ar" ? "لوحة الإدارة" : "Admin Panel"}
+                  </Button>
+                </Link>
+              )}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => logout()}
+                className="bg-transparent border-white text-white hover:bg-red-500 hover:border-red-500"
+              >
+                <LogOut className="w-4 h-4 mr-1" />
+                {language === "ar" ? "خروج" : "Logout"}
+              </Button>
+            </div>
+          ) : (
+            <Button
+              size="sm"
+              onClick={() => window.location.href = getLoginUrl()}
+              className="bg-secondary text-primary hover:bg-secondary/90 font-semibold"
+            >
+              <LogIn className="w-4 h-4 mr-1" />
+              {language === "ar" ? "تسجيل الدخول" : "Login"}
+            </Button>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -298,6 +333,38 @@ export function Navigation() {
             >
               {language === "ar" ? "English" : "العربية"}
             </Button>
+
+            {/* Mobile Login/Logout */}
+            {user ? (
+              <div className="space-y-2">
+                {user.role === "admin" && (
+                  <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button size="sm" className="bg-secondary text-primary hover:bg-secondary/90 font-semibold w-full">
+                      <User className="w-4 h-4 mr-1" />
+                      {language === "ar" ? "لوحة الإدارة" : "Admin Panel"}
+                    </Button>
+                  </Link>
+                )}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => { logout(); setIsMobileMenuOpen(false); }}
+                  className="bg-transparent border-white text-white hover:bg-red-500 hover:border-red-500 w-full"
+                >
+                  <LogOut className="w-4 h-4 mr-1" />
+                  {language === "ar" ? "خروج" : "Logout"}
+                </Button>
+              </div>
+            ) : (
+              <Button
+                size="sm"
+                onClick={() => window.location.href = getLoginUrl()}
+                className="bg-secondary text-primary hover:bg-secondary/90 font-semibold w-full"
+              >
+                <LogIn className="w-4 h-4 mr-1" />
+                {language === "ar" ? "تسجيل الدخول" : "Login"}
+              </Button>
+            )}
           </div>
         </div>
       )}

@@ -1,12 +1,25 @@
 import "dotenv/config";
+// Polyfill global fetch with node-fetch to avoid undici/WebAssembly issues on shared hosting
+import nodeFetch, { Headers as NodeHeaders, Request as NodeRequest, Response as NodeResponse } from "node-fetch";
+if (!globalThis.fetch) {
+  // @ts-ignore
+  globalThis.fetch = nodeFetch;
+  // @ts-ignore
+  globalThis.Headers = NodeHeaders;
+  // @ts-ignore
+  globalThis.Request = NodeRequest;
+  // @ts-ignore
+  globalThis.Response = NodeResponse;
+}
 import express from "express";
 import { createServer } from "http";
 import net from "net";
+import fs from "fs";
+import path from "path";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
-import { serveStatic } from "./vite";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -27,14 +40,40 @@ async function findAvailablePort(startPort: number = 3000): Promise<number> {
   throw new Error(`No available port found starting from ${startPort}`);
 }
 
+function serveStatic(app: express.Express) {
+  // In production bundle, __dirname points to dist/ folder
+  const distPath = path.resolve(import.meta.dirname, "public");
+
+  if (!fs.existsSync(distPath)) {
+    console.error(`Could not find the build directory: ${distPath}`);
+    console.error("Make sure dist/public exists with the built frontend files.");
+  } else {
+    console.log(`Serving static files from: ${distPath}`);
+  }
+
+  app.use(express.static(distPath));
+
+  // fall through to index.html for SPA routing
+  app.use("*", (_req, res) => {
+    const indexPath = path.resolve(distPath, "index.html");
+    if (fs.existsSync(indexPath)) {
+      res.sendFile(indexPath);
+    } else {
+      res.status(404).send("Frontend not found. Please build the frontend first.");
+    }
+  });
+}
+
 async function startServer() {
   const app = express();
   const server = createServer(app);
-  // Configure body parser with larger size limit for file uploads
+
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
-  // OAuth callback under /api/oauth/callback
+
+  // OAuth callback
   registerOAuthRoutes(app);
+
   // tRPC API
   app.use(
     "/api/trpc",
@@ -43,14 +82,9 @@ async function startServer() {
       createContext,
     })
   );
-  // development mode uses Vite, production mode uses static files
-  if (process.env.NODE_ENV === "development") {
-    // Dynamic import so vite is NOT bundled in production build
-    const { setupVite } = await import("./vite");
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
+
+  // Serve static frontend files
+  serveStatic(app);
 
   const preferredPort = parseInt(process.env.PORT || "3000");
   const port = await findAvailablePort(preferredPort);

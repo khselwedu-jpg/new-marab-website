@@ -1,4 +1,7 @@
 import { TRPCError } from "@trpc/server";
+import https from "https";
+import http from "http";
+import { URL } from "url";
 import { ENV } from "./env";
 
 export type NotificationPayload = {
@@ -85,27 +88,35 @@ export async function notifyOwner(
   const endpoint = buildEndpointUrl(ENV.forgeApiUrl);
 
   try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        authorization: `Bearer ${ENV.forgeApiKey}`,
-        "content-type": "application/json",
-        "connect-protocol-version": "1",
-      },
-      body: JSON.stringify({ title, content }),
-    });
-
-    if (!response.ok) {
-      const detail = await response.text().catch(() => "");
-      console.warn(
-        `[Notification] Failed to notify owner (${response.status} ${response.statusText})${
-          detail ? `: ${detail}` : ""
-        }`
+    const body = JSON.stringify({ title, content });
+    const parsedUrl = new URL(endpoint);
+    const isHttps = parsedUrl.protocol === "https:";
+    const lib = isHttps ? https : http;
+    const statusCode = await new Promise<number>((resolve, reject) => {
+      const req = lib.request(
+        {
+          hostname: parsedUrl.hostname,
+          port: parsedUrl.port || (isHttps ? 443 : 80),
+          path: parsedUrl.pathname + parsedUrl.search,
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            authorization: `Bearer ${ENV.forgeApiKey}`,
+            "content-type": "application/json",
+            "connect-protocol-version": "1",
+            "content-length": Buffer.byteLength(body),
+          },
+        },
+        (res) => resolve(res.statusCode ?? 0)
       );
+      req.on("error", reject);
+      req.write(body);
+      req.end();
+    });
+    if (statusCode < 200 || statusCode >= 300) {
+      console.warn(`[Notification] Failed to notify owner (${statusCode})`);
       return false;
     }
-
     return true;
   } catch (error) {
     console.warn("[Notification] Error calling notification service:", error);
