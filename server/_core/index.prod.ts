@@ -68,6 +68,10 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
 
+  // Trust the first proxy (Namecheap / cPanel reverse proxy)
+  // This allows req.protocol to correctly reflect https when behind a proxy
+  app.set("trust proxy", 1);
+
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
