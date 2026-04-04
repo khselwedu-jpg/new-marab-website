@@ -35,10 +35,14 @@ export const appRouter = router({
         }
         await db.updateAdminLastSignedIn(admin.id);
         // Create a JWT session cookie
-        const secret = new TextEncoder().encode(ENV.cookieSecret);
+        // Use a fallback secret if JWT_SECRET is not set (should always be set in production)
+        const jwtSecret = ENV.cookieSecret || "mareb-insurance-default-secret-change-me";
+        const secret = new TextEncoder().encode(jwtSecret);
+        // Use a fallback appId if VITE_APP_ID is not set
+        const appId = ENV.appId || "mareb-insurance";
         const token = await new SignJWT({
           openId: `admin_${admin.id}`,
-          appId: ENV.appId,
+          appId,
           name: admin.name || admin.username,
           isAdmin: true,
         })

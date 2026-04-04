@@ -181,7 +181,8 @@ class SDKServer {
   }
 
   private getSessionSecret() {
-    const secret = ENV.cookieSecret;
+    // Use the same fallback as adminLogin so tokens can always be verified
+    const secret = ENV.cookieSecret || "mareb-insurance-default-secret-change-me";
     return new TextEncoder().encode(secret);
   }
 
@@ -236,18 +237,18 @@ class SDKServer {
       });
       const { openId, appId, name } = payload as Record<string, unknown>;
 
+      // openId and name are required; appId may be empty on self-hosted deployments
       if (
         !isNonEmptyString(openId) ||
-        !isNonEmptyString(appId) ||
         !isNonEmptyString(name)
       ) {
-        console.warn("[Auth] Session payload missing required fields");
+        console.warn("[Auth] Session payload missing required fields", { openId, appId, name });
         return null;
       }
 
       return {
         openId,
-        appId,
+        appId: isNonEmptyString(appId) ? appId : "mareb-insurance",
         name,
       };
     } catch (error) {
