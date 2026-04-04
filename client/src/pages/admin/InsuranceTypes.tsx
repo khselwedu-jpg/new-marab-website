@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import type { InsuranceType } from "../../../../drizzle/schema";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 const defaultForm = {
   slug: "",
@@ -166,10 +167,11 @@ export default function InsuranceTypesPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">رابط الصورة</label>
-              <Input value={formData.imageUrl} onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })} placeholder="https://..." required />
-            </div>
+            <ImageUpload
+              value={formData.imageUrl}
+              onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+              label="صورة نوع التأمين"
+            />
 
             <div className="grid grid-cols-2 gap-4">
               <div>

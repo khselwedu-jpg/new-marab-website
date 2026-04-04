@@ -7,6 +7,7 @@ import { ENV } from "./_core/env";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router } from "./_core/trpc";
 import { adminRouter } from "./admin/adminRouter";
+import { contentRouter } from "./contentRouter";
 import * as db from "./db";
 import { ONE_YEAR_MS } from "@shared/const";
 
@@ -66,6 +67,9 @@ export const appRouter = router({
 
   // Admin CMS routes
   admin: adminRouter,
+
+  // Public content routes (no auth required)
+  content: contentRouter,
 });
 
 export type AppRouter = typeof appRouter;

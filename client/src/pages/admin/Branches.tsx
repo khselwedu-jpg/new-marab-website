@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import type { Branch } from "../../../../drizzle/schema";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 const defaultForm = {
   nameAr: "",
@@ -163,10 +164,11 @@ export default function BranchesPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">رابط الصورة</label>
-              <Input value={formData.imageUrl} onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })} placeholder="https://..." />
-            </div>
+            <ImageUpload
+              value={formData.imageUrl}
+              onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+              label="صورة الفرع"
+            />
 
             <div className="grid grid-cols-2 gap-4">
               <div>

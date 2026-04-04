@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import type { Partner } from "../../../../drizzle/schema";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 const defaultForm = {
   nameAr: "",
@@ -154,10 +155,11 @@ export default function PartnersPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">رابط الشعار</label>
-              <Input value={formData.logoUrl} onChange={(e) => setFormData({ ...formData, logoUrl: e.target.value })} placeholder="https://..." />
-            </div>
+            <ImageUpload
+              value={formData.logoUrl}
+              onChange={(url) => setFormData({ ...formData, logoUrl: url })}
+              label="شعار الشريك"
+            />
 
             <div>
               <label className="block text-sm font-medium mb-2">رابط الموقع</label>

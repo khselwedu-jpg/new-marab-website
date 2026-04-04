@@ -1,18 +1,14 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
+import { trpc } from "@/lib/trpc";
 
 export function PartnersSection() {
   const { t } = useLanguage();
+  const { data } = trpc.content.partners.useQuery();
+  const partners = data || [];
 
-  const partners = [
-    { name: "Partner Company 1", logo: "https://via.placeholder.com/200x100?text=Partner+1" },
-    { name: "Partner Company 2", logo: "https://via.placeholder.com/200x100?text=Partner+2" },
-    { name: "Partner Company 3", logo: "https://via.placeholder.com/200x100?text=Partner+3" },
-    { name: "Partner Company 4", logo: "https://via.placeholder.com/200x100?text=Partner+4" },
-    { name: "Partner Company 5", logo: "https://via.placeholder.com/200x100?text=Partner+5" },
-    { name: "Partner Company 6", logo: "https://via.placeholder.com/200x100?text=Partner+6" },
-  ];
+  if (partners.length === 0) return null;
 
   return (
     <section className="py-20 bg-white">
@@ -25,22 +21,20 @@ export function PartnersSection() {
             {t("partners.subtitle")}
           </p>
         </div>
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-8">
-          {partners.map((partner, index) => (
+          {partners.map((partner) => (
             <div
-              key={index}
+              key={partner.id}
               className="group bg-muted rounded-lg p-6 flex items-center justify-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
             >
               <img
-                src={partner.logo}
-                alt={partner.name}
+                src={partner.logoUrl}
+                alt={partner.nameAr}
                 className="w-full h-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity"
               />
             </div>
           ))}
         </div>
-
         <div className="text-center">
           <Link href="/partners/success">
             <Button

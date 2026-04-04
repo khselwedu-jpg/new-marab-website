@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import type { AboutContent } from "../../../../drizzle/schema";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 const defaultForm = {
   titleAr: "",
@@ -142,10 +143,11 @@ export default function AboutContentPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">رابط الصورة</label>
-              <Input value={formData.imageUrl} onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })} placeholder="https://..." />
-            </div>
+            <ImageUpload
+              value={formData.imageUrl}
+              onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+              label="صورة قسم من نحن"
+            />
 
             <div className="flex justify-end gap-2 pt-4">
               <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)}>إلغاء</Button>

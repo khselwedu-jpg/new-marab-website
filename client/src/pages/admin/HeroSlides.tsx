@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import type { HeroSlide } from "../../../../drizzle/schema";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 export default function HeroSlidesPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -182,15 +183,11 @@ export default function HeroSlidesPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">Image URL</label>
-              <Input
-                value={formData.imageUrl}
-                onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-                placeholder="https://example.com/image.jpg"
-                required
-              />
-            </div>
+            <ImageUpload
+              value={formData.imageUrl}
+              onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+              label="صورة الشريحة"
+            />
 
             <div className="grid grid-cols-2 gap-4">
               <div>

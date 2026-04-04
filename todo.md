@@ -106,3 +106,18 @@
 - [ ] Media library for image uploads
 - [ ] Update frontend to fetch from database
 - [x] Seed initial data from current static content
+
+## Image Upload & Frontend-Backend Integration
+
+- [ ] Image upload endpoint (POST /api/upload) using S3 storage
+- [ ] ImageUpload React component for admin CMS
+- [ ] Update all admin pages to use ImageUpload instead of URL input
+- [ ] Public API procedures for all content sections
+- [ ] Connect Home page hero slides to backend
+- [ ] Connect Home page insurance types to backend
+- [ ] Connect Home page statistics to backend
+- [ ] Connect Home page partners to backend
+- [ ] Connect Home page news/events to backend
+- [ ] Connect Home page why-us section to backend
+- [ ] Connect About page to backend
+- [ ] Connect Branches page to backend

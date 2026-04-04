@@ -20,6 +20,7 @@ import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
+import { registerUploadRoute } from "../uploadRoute";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -77,6 +78,9 @@ async function startServer() {
 
   // OAuth callback
   registerOAuthRoutes(app);
+
+  // File upload route
+  registerUploadRoute(app);
 
   // tRPC API
   app.use(

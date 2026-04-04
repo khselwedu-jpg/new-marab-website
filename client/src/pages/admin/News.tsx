@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import type { News } from "../../../../drizzle/schema";
+import { ImageUpload } from "@/components/admin/ImageUpload";
 
 const today = new Date().toISOString().split("T")[0];
 
@@ -184,10 +185,11 @@ export default function NewsPage() {
               </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium mb-2">رابط الصورة</label>
-              <Input value={formData.imageUrl} onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })} placeholder="https://..." required />
-            </div>
+            <ImageUpload
+              value={formData.imageUrl}
+              onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+              label="صورة الخبر"
+            />
 
             <div className="grid grid-cols-2 gap-4">
               <div>
