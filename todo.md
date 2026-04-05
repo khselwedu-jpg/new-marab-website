@@ -129,3 +129,6 @@
 - [ ] Add dynamic pages system (chairman, vision, mission, goals, structure, team, privacy, cookies, partners pages, media pages)
 - [ ] Add pages admin CRUD in CMS
 - [ ] Connect all navigation links to dynamic pages
+- [ ] Make BranchesSection fully dynamic from API
+- [ ] Make Footer dynamic (social media links from siteSettings)
+- [ ] Make InsuranceTypes page fully dynamic from API

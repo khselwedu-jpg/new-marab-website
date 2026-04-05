@@ -72,13 +72,15 @@ function Router() {
                 <Route path={"/about/privacy"}>{() => <DynamicPage slug="about/privacy" />}</Route>
                 <Route path={"/about/cookies"}>{() => <DynamicPage slug="about/cookies" />}</Route>
 
-                {/* Insurance types */}
+                {/* Insurance types - static routes for known types */}
                 <Route path={"/insurance/health"}>{() => <InsuranceDetail type="health" />}</Route>
                 <Route path={"/insurance/car"}>{() => <InsuranceDetail type="car" />}</Route>
                 <Route path={"/insurance/marine"}>{() => <InsuranceDetail type="marine" />}</Route>
                 <Route path={"/insurance/engineering"}>{() => <InsuranceDetail type="engineering" />}</Route>
                 <Route path={"/insurance/energy"}>{() => <InsuranceDetail type="energy" />}</Route>
                 <Route path={"/insurance/takaful"}>{() => <InsuranceDetail type="takaful" />}</Route>
+                {/* Dynamic insurance route for any slug added via admin panel */}
+                <Route path={"/insurance/:slug"}>{(params) => <InsuranceDetail slug={params.slug} />}</Route>
 
                 {/* Partners section */}
                 <Route path={"/partners/reinsurers"}>{() => <PartnersPage category="reinsurer" />}</Route>
