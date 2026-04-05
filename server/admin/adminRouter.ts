@@ -11,7 +11,10 @@ import {
   contactSubmissions,
   whyUsFeatures,
   aboutContent,
-  siteSettings
+  siteSettings,
+  dynamicPages,
+  teamMembers,
+  mediaItems,
 } from "../../drizzle/schema";
 import { count, eq } from "drizzle-orm";
 
@@ -337,6 +340,103 @@ export const adminRouter = router({
           await db.insert(siteSettings).values(item);
         }
       }
+      return { success: true };
+    }),
+  }),
+
+  // Dynamic Pages CRUD
+  pages: router({
+    list: adminProcedure.query(async () => {
+      const db = await getDb();
+      if (!db) return [];
+      return await db.select().from(dynamicPages).orderBy(dynamicPages.slug);
+    }),
+    getBySlug: adminProcedure.input((val: any) => val).query(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) return null;
+      const rows = await db.select().from(dynamicPages).where(eq(dynamicPages.slug, input.slug));
+      return rows[0] ?? null;
+    }),
+    upsert: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const existing = await db.select().from(dynamicPages).where(eq(dynamicPages.slug, input.slug));
+      if (existing.length > 0) {
+        await db.update(dynamicPages).set({
+          titleAr: input.titleAr,
+          titleEn: input.titleEn,
+          contentAr: input.contentAr,
+          contentEn: input.contentEn,
+          imageUrl: input.imageUrl,
+          metaDescriptionAr: input.metaDescriptionAr,
+          metaDescriptionEn: input.metaDescriptionEn,
+          isActive: input.isActive ?? true,
+        }).where(eq(dynamicPages.slug, input.slug));
+      } else {
+        await db.insert(dynamicPages).values(input);
+      }
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.delete(dynamicPages).where(eq(dynamicPages.id, input.id));
+      return { success: true };
+    }),
+  }),
+
+  // Team Members CRUD
+  team: router({
+    list: adminProcedure.query(async () => {
+      const db = await getDb();
+      if (!db) return [];
+      return await db.select().from(teamMembers).orderBy(teamMembers.displayOrder);
+    }),
+    create: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.insert(teamMembers).values(input);
+      return { success: true };
+    }),
+    update: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const { id, ...data } = input;
+      await db.update(teamMembers).set(data).where(eq(teamMembers.id, id));
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.delete(teamMembers).where(eq(teamMembers.id, input.id));
+      return { success: true };
+    }),
+  }),
+
+  // Media Items CRUD
+  media: router({
+    list: adminProcedure.query(async () => {
+      const db = await getDb();
+      if (!db) return [];
+      return await db.select().from(mediaItems).orderBy(mediaItems.displayOrder);
+    }),
+    create: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.insert(mediaItems).values(input);
+      return { success: true };
+    }),
+    update: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const { id, ...data } = input;
+      await db.update(mediaItems).set(data).where(eq(mediaItems.id, id));
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      await db.delete(mediaItems).where(eq(mediaItems.id, input.id));
       return { success: true };
     }),
   }),

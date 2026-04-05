@@ -13,7 +13,10 @@ import {
   Settings,
   LogOut,
   Menu,
-  X
+  X,
+  BookOpen,
+  UserSquare2,
+  Camera
 } from "lucide-react";
 import { useState } from "react";
 
@@ -52,6 +55,9 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     { icon: MapPin, label: "Branches", href: "/admin/branches" },
     { icon: Newspaper, label: "News & Events", href: "/admin/news" },
     { icon: Mail, label: "Contact Messages", href: "/admin/contacts" },
+    { icon: BookOpen, label: "Pages", href: "/admin/pages" },
+    { icon: UserSquare2, label: "Team Members", href: "/admin/team" },
+    { icon: Camera, label: "Media Gallery", href: "/admin/media" },
     { icon: Settings, label: "Site Settings", href: "/admin/settings" },
   ];
 

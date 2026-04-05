@@ -233,3 +233,68 @@ export const whyUsFeatures = mysqlTable("why_us_features", {
 
 export type WhyUsFeature = typeof whyUsFeatures.$inferSelect;
 export type InsertWhyUsFeature = typeof whyUsFeatures.$inferInsert;
+
+/**
+ * Dynamic pages - for all navigation sub-pages
+ * slug: unique identifier like 'about/chairman', 'about/vision', 'partners/reinsurers', 'media/news'
+ */
+export const dynamicPages = mysqlTable("dynamic_pages", {
+  id: int("id").autoincrement().primaryKey(),
+  slug: varchar("slug", { length: 200 }).notNull().unique(),
+  titleAr: varchar("titleAr", { length: 255 }).notNull(),
+  titleEn: varchar("titleEn", { length: 255 }).notNull(),
+  contentAr: text("contentAr"),
+  contentEn: text("contentEn"),
+  imageUrl: text("imageUrl"),
+  metaDescriptionAr: text("metaDescriptionAr"),
+  metaDescriptionEn: text("metaDescriptionEn"),
+  isActive: boolean("isActive").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type DynamicPage = typeof dynamicPages.$inferSelect;
+export type InsertDynamicPage = typeof dynamicPages.$inferInsert;
+
+/**
+ * Team members
+ */
+export const teamMembers = mysqlTable("team_members", {
+  id: int("id").autoincrement().primaryKey(),
+  nameAr: varchar("nameAr", { length: 255 }).notNull(),
+  nameEn: varchar("nameEn", { length: 255 }).notNull(),
+  positionAr: varchar("positionAr", { length: 255 }),
+  positionEn: varchar("positionEn", { length: 255 }),
+  bioAr: text("bioAr"),
+  bioEn: text("bioEn"),
+  imageUrl: text("imageUrl"),
+  displayOrder: int("displayOrder").default(0).notNull(),
+  isActive: boolean("isActive").default(true).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type TeamMember = typeof teamMembers.$inferSelect;
+export type InsertTeamMember = typeof teamMembers.$inferInsert;
+
+/**
+ * Media gallery items (photos, videos)
+ */
+export const mediaItems = mysqlTable("media_items", {
+  id: int("id").autoincrement().primaryKey(),
+  titleAr: varchar("titleAr", { length: 255 }).notNull(),
+  titleEn: varchar("titleEn", { length: 255 }).notNull(),
+  descriptionAr: text("descriptionAr"),
+  descriptionEn: text("descriptionEn"),
+  mediaUrl: text("mediaUrl").notNull(),
+  thumbnailUrl: text("thumbnailUrl"),
+  mediaType: mysqlEnum("mediaType", ["photo", "video", "conference", "event"]).default("photo").notNull(),
+  displayOrder: int("displayOrder").default(0).notNull(),
+  isActive: boolean("isActive").default(true).notNull(),
+  publishDate: timestamp("publishDate").defaultNow().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type MediaItem = typeof mediaItems.$inferSelect;
+export type InsertMediaItem = typeof mediaItems.$inferInsert;

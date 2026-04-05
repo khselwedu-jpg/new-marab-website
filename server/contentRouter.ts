@@ -14,8 +14,12 @@ import {
   whyUsFeatures,
   aboutContent,
   siteSettings,
+  dynamicPages,
+  teamMembers,
+  mediaItems,
 } from "../drizzle/schema";
 import { eq, asc, desc } from "drizzle-orm";
+import { z } from "zod";
 
 async function db() {
   const d = await getDb();
@@ -36,6 +40,14 @@ export const contentRouter = router({
       .orderBy(asc(insuranceTypes.displayOrder));
   }),
 
+  insuranceBySlug: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ input }) => {
+      const rows = await (await db()).select().from(insuranceTypes)
+        .where(eq(insuranceTypes.slug, input.slug));
+      return rows[0] ?? null;
+    }),
+
   statistics: publicProcedure.query(async () => {
     return (await db()).select().from(statistics)
       .where(eq(statistics.isActive, true))
@@ -48,6 +60,14 @@ export const contentRouter = router({
       .orderBy(asc(partners.displayOrder));
   }),
 
+  partnersByCategory: publicProcedure
+    .input(z.object({ category: z.enum(["reinsurer", "broker", "medical", "other"]) }))
+    .query(async ({ input }) => {
+      return (await db()).select().from(partners)
+        .where(eq(partners.category, input.category))
+        .orderBy(asc(partners.displayOrder));
+    }),
+
   branches: publicProcedure.query(async () => {
     return (await db()).select().from(branches)
       .where(eq(branches.isActive, true))
@@ -59,6 +79,14 @@ export const contentRouter = router({
       .where(eq(news.isActive, true))
       .orderBy(desc(news.publishDate));
   }),
+
+  newsById: publicProcedure
+    .input(z.object({ id: z.number() }))
+    .query(async ({ input }) => {
+      const rows = await (await db()).select().from(news)
+        .where(eq(news.id, input.id));
+      return rows[0] ?? null;
+    }),
 
   whyUs: publicProcedure.query(async () => {
     return (await db()).select().from(whyUsFeatures)
@@ -73,7 +101,37 @@ export const contentRouter = router({
 
   settings: publicProcedure.query(async () => {
     const rows = await (await db()).select().from(siteSettings);
-    // Return array of settings with both AR and EN values
     return rows;
+  }),
+
+  // Dynamic pages - fetch by slug
+  pageBySlug: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ input }) => {
+      const rows = await (await db()).select().from(dynamicPages)
+        .where(eq(dynamicPages.slug, input.slug));
+      return rows[0] ?? null;
+    }),
+
+  // Team members
+  teamMembers: publicProcedure.query(async () => {
+    return (await db()).select().from(teamMembers)
+      .where(eq(teamMembers.isActive, true))
+      .orderBy(asc(teamMembers.displayOrder));
+  }),
+
+  // Media items by type
+  mediaByType: publicProcedure
+    .input(z.object({ type: z.enum(["photo", "video", "conference", "event"]) }))
+    .query(async ({ input }) => {
+      return (await db()).select().from(mediaItems)
+        .where(eq(mediaItems.mediaType, input.type))
+        .orderBy(desc(mediaItems.publishDate));
+    }),
+
+  allMedia: publicProcedure.query(async () => {
+    return (await db()).select().from(mediaItems)
+      .where(eq(mediaItems.isActive, true))
+      .orderBy(desc(mediaItems.publishDate));
   }),
 });

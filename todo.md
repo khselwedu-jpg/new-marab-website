@@ -125,3 +125,7 @@
 ## Bug Fixes
 - [x] Fix Arabic text stored as ??? in database (charset utf8mb4)
 - [x] Fix image upload not working from admin CMS
+- [ ] Fix 404 on internal pages - SPA routing on Namecheap
+- [ ] Add dynamic pages system (chairman, vision, mission, goals, structure, team, privacy, cookies, partners pages, media pages)
+- [ ] Add pages admin CRUD in CMS
+- [ ] Connect all navigation links to dynamic pages
