@@ -121,3 +121,7 @@
 - [ ] Connect Home page why-us section to backend
 - [ ] Connect About page to backend
 - [ ] Connect Branches page to backend
+
+## Bug Fixes
+- [x] Fix Arabic text stored as ??? in database (charset utf8mb4)
+- [x] Fix image upload not working from admin CMS

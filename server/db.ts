@@ -1,5 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
+import mysql from "mysql2/promise";
 import { InsertUser, users, adminAccounts, AdminAccount } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -9,7 +10,17 @@ let _db: ReturnType<typeof drizzle> | null = null;
 export async function getDb() {
   if (!_db && process.env.DATABASE_URL) {
     try {
-      _db = drizzle(process.env.DATABASE_URL);
+      // Use mysql2 Pool with explicit utf8mb4 charset to support Arabic text
+      const pool = mysql.createPool({
+        uri: process.env.DATABASE_URL,
+        charset: "utf8mb4",
+        connectionLimit: 5,
+      });
+      // Set charset on every new connection from the pool
+      pool.on("connection", (conn: any) => {
+        conn.query("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci");
+      });
+      _db = drizzle(pool as any);
     } catch (error) {
       console.warn("[Database] Failed to connect:", error);
       _db = null;
