@@ -31,6 +31,7 @@ import AdminPagesPage from "./pages/admin/DynamicPages";
 import AdminTeamPage from "./pages/admin/TeamMembers";
 import AdminMediaPage from "./pages/admin/MediaItems";
 import { WhatsAppButton } from "./components/WhatsAppButton";
+import BranchesPublicPage from "./pages/Branches";
 
 function Router() {
   return (
@@ -94,6 +95,9 @@ function Router() {
                 <Route path={"/media/conferences"}>{() => <MediaPage type="conference" />}</Route>
                 <Route path={"/media/events"}>{() => <MediaPage type="event" />}</Route>
                 <Route path={"/media/news"}>{() => <DynamicPage slug="media/news" />}</Route>
+
+                {/* Branches */}
+                <Route path={"/about/branches"} component={BranchesPublicPage} />
 
                 {/* Fallback */}
                 <Route path={"/404"} component={NotFound} />
