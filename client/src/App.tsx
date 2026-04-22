@@ -30,6 +30,7 @@ import LoginPage from "./pages/Login";
 import AdminPagesPage from "./pages/admin/DynamicPages";
 import AdminTeamPage from "./pages/admin/TeamMembers";
 import AdminMediaPage from "./pages/admin/MediaItems";
+import { WhatsAppButton } from "./components/WhatsAppButton";
 
 function Router() {
   return (
@@ -100,6 +101,7 @@ function Router() {
               </Switch>
             </main>
             <Footer />
+            <WhatsAppButton />
           </div>
         )}
       </Route>

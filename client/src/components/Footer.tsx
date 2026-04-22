@@ -164,7 +164,7 @@ export function Footer() {
                   <Phone className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
                   <div>
                     <div className="text-sm font-semibold text-secondary">{t("footer.phone")}</div>
-                    <a href={`tel:${phone}`} className="text-white/80 hover:text-secondary text-sm">
+                    <a href={`tel:${phone}`} dir="ltr" className="text-white/80 hover:text-secondary text-sm">
                       {phone}
                     </a>
                   </div>

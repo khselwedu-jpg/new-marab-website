@@ -49,7 +49,7 @@ export function BranchesSection() {
                 {branch.phone && (
                   <div className="flex items-center gap-2 text-foreground/70">
                     <Phone className="w-5 h-5 text-secondary flex-shrink-0" />
-                    <a href={`tel:${branch.phone}`} className="text-sm hover:text-secondary">
+                    <a href={`tel:${branch.phone}`} dir="ltr" className="text-sm hover:text-secondary">
                       {branch.phone}
                     </a>
                   </div>
