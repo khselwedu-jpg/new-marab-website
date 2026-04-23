@@ -68,7 +68,7 @@ export function Navigation() {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <img
-            src="/logo.jpg"
+            src="https://d2xsxph8kpxj0f.cloudfront.net/310519663249456574/9MB65zStTYVQDwrWb5myAt/mareb-logo-transparent_251a7e26.png"
             alt="Mareb Insurance"
             className="h-16 w-auto object-contain"
           />

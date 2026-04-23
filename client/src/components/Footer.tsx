@@ -45,7 +45,7 @@ export function Footer() {
           {/* Column 1: Logo and Social Media */}
           <div className="space-y-4">
             <img
-              src="/logo.jpg"
+              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663249456574/9MB65zStTYVQDwrWb5myAt/mareb-logo-transparent_251a7e26.png"
               alt="Mareb Insurance"
               className="h-20 w-auto object-contain mb-4"
             />
