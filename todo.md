@@ -141,3 +141,6 @@
 - [x] Fix contact form - was simulating submission, now saves to database via trpc.content.submitContact
 - [x] Add content for Vision, Mission, Goals, and Who We Are dynamic pages
 - [x] Fix Navigation.tsx slugs to use about/ prefix matching database slugs
+- [x] Update contact page map to show Aden location (Madinat Inma, Al-Qasr Hotel area)
+- [x] Update contact page phone to Aden numbers (+967 02 362 317/318/319)
+- [x] Update address in site_settings and branches table to Madinat Inma, Aden

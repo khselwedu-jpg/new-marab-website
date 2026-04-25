@@ -202,8 +202,11 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary mb-1">{t("footer.phone")}</h4>
-                    <a href="tel:+9671234567" className="text-foreground/70 hover:text-secondary">
-                      +967 1 234 567
+                    <a href="tel:+96702362317" className="text-foreground/70 hover:text-secondary block">
+                      +967 02 362 317
+                    </a>
+                    <a href="tel:+96702362318" className="text-foreground/70 hover:text-secondary block">
+                      +967 02 362 318 / 319
                     </a>
                   </div>
                 </div>
@@ -228,8 +231,8 @@ export default function Contact() {
                     <h4 className="font-semibold text-primary mb-1">{t("footer.address")}</h4>
                     <p className="text-foreground/70">
                       {t("nav.home") === "الرئيسية" 
-                        ? "شارع الزبيري، صنعاء، اليمن"
-                        : "Al-Zubairi Street, Sana'a, Yemen"}
+                        ? "مدينة إنماء، مقابل فندق القصر، عدن، اليمن"
+                        : "Madinat Inma, Opposite Al-Qasr Hotel, Aden, Yemen"}
                     </p>
                   </div>
                 </div>
@@ -238,7 +241,7 @@ export default function Contact() {
               {/* Google Map */}
               <div className="rounded-lg overflow-hidden shadow-lg h-[400px]">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61726.89283253516!2d44.17616!3d15.35472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1603dbb0e6c7e5a5%3A0x8e7c3e5e5e5e5e5e!2sSana&#39;a%2C%20Yemen!5e0!3m2!1sen!2s!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3978.0!2d44.9516!3d12.8304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1604db7a2b2b2b2b%3A0x0!2z2YXYr9mK2YbYqSDYpdmG2YXYp9ihINmF2YLYp9io2YQg2YHZhtiv2YEg2KfZhNmC2LXYsSDYjCDYudiv2YYg2KfZhNmK2YXZhg!5e0!3m2!1sar!2s!4v1714000000000!5m2!1sar!2s"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
