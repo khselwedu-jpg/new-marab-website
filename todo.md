@@ -132,3 +132,9 @@
 - [ ] Make BranchesSection fully dynamic from API
 - [ ] Make Footer dynamic (social media links from siteSettings)
 - [ ] Make InsuranceTypes page fully dynamic from API
+
+## Bug Fixes - Round 2
+- [x] Fix insurance types dropdown showing only 6 instead of all 12 (now fetches dynamically from DB)
+- [x] Hide dynamic pages with no content from navigation menu (filter by pagesWithContentSlugs)
+- [x] Fix footer links not scrolling to top of page when clicked
+- [x] Fix nested anchor tag in AdminLayout.tsx

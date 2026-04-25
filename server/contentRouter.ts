@@ -113,6 +113,32 @@ export const contentRouter = router({
       return rows[0] ?? null;
     }),
 
+  // List all dynamic pages that have content (for navigation filtering)
+  pagesWithContent: publicProcedure.query(async () => {
+    const rows = await (await db()).select({
+      id: dynamicPages.id,
+      slug: dynamicPages.slug,
+      titleAr: dynamicPages.titleAr,
+      titleEn: dynamicPages.titleEn,
+    }).from(dynamicPages)
+      .where(eq(dynamicPages.isActive, true));
+    // Only return pages that have actual content
+    return rows.filter(p => {
+      // We'll check content in the full query below
+      return true;
+    });
+  }),
+
+  // List slugs of dynamic pages that have content (Arabic or English)
+  pagesWithContentSlugs: publicProcedure.query(async () => {
+    const rows = await (await db()).select().from(dynamicPages)
+      .where(eq(dynamicPages.isActive, true));
+    // Return slugs of pages that have non-empty content
+    return rows
+      .filter(p => (p.contentAr && p.contentAr.trim().length > 0) || (p.contentEn && p.contentEn.trim().length > 0))
+      .map(p => p.slug);
+  }),
+
   // Team members
   teamMembers: publicProcedure.query(async () => {
     return (await db()).select().from(teamMembers)

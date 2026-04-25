@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { useLocation } from "wouter";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, Phone, Mail, MapPin } from "lucide-react";
 import { trpc } from "@/lib/trpc";
@@ -12,6 +12,7 @@ function getSetting(settings: { key: string; valueAr: string | null; valueEn: st
 export function Footer() {
   const { t, language } = useLanguage();
   const isAr = language === "ar";
+  const [, navigate] = useLocation();
 
   const { data: settings = [] } = trpc.content.settings.useQuery();
   const { data: insuranceTypes = [] } = trpc.content.insuranceTypes.useQuery();
@@ -38,17 +39,25 @@ export function Footer() {
     { label: isAr ? "تواصل معنا" : "Contact Us", href: "/contact" },
   ];
 
+  // Navigate and scroll to top
+  const handleNavClick = (href: string) => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+    navigate(href);
+  };
+
   return (
     <footer className="bg-primary text-white">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Column 1: Logo and Social Media */}
           <div className="space-y-4">
-            <img
-              src="https://d2xsxph8kpxj0f.cloudfront.net/310519663249456574/9MB65zStTYVQDwrWb5myAt/mareb-logo-transparent_251a7e26.png"
-              alt="Mareb Insurance"
-              className="h-20 w-auto object-contain mb-4"
-            />
+            <button onClick={() => handleNavClick("/")} className="block">
+              <img
+                src="/logo.jpg"
+                alt="Mareb Insurance"
+                className="h-20 w-auto object-contain mb-4"
+              />
+            </button>
             <p className="text-white/80 text-sm leading-relaxed">
               {t("footer.aboutText")}
             </p>
@@ -108,9 +117,12 @@ export function Footer() {
             <ul className="space-y-2">
               {quickLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-white/80 hover:text-secondary transition-colors text-sm">
+                  <button
+                    onClick={() => handleNavClick(link.href)}
+                    className="text-white/80 hover:text-secondary transition-colors text-sm text-right w-full"
+                  >
                     {link.label}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -125,12 +137,12 @@ export function Footer() {
               {insuranceTypes.length > 0 ? (
                 insuranceTypes.map((type) => (
                   <li key={type.id}>
-                    <Link
-                      href={`/insurance/${type.slug}`}
-                      className="text-white/80 hover:text-secondary transition-colors text-sm"
+                    <button
+                      onClick={() => handleNavClick(`/insurance/${type.slug}`)}
+                      className="text-white/80 hover:text-secondary transition-colors text-sm text-right w-full"
                     >
                       {isAr ? type.titleAr : type.titleEn}
-                    </Link>
+                    </button>
                   </li>
                 ))
               ) : (
@@ -144,9 +156,12 @@ export function Footer() {
                   { label: isAr ? "التأمين التكافلي" : "Takaful Insurance", href: "/insurance/takaful" },
                 ].map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-white/80 hover:text-secondary transition-colors text-sm">
+                    <button
+                      onClick={() => handleNavClick(link.href)}
+                      className="text-white/80 hover:text-secondary transition-colors text-sm text-right w-full"
+                    >
                       {link.label}
-                    </Link>
+                    </button>
                   </li>
                 ))
               )}
