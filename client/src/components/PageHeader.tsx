@@ -14,7 +14,7 @@ export function PageHeader({ title, breadcrumb, image }: PageHeaderProps) {
       {image && (
         <>
           <img
-            src={image}
+            src={image} loading="lazy"
             alt={title}
             className="absolute inset-0 w-full h-full object-cover"
           />

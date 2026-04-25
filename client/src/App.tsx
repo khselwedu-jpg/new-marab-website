@@ -1,117 +1,130 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
+import { lazy, Suspense } from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
-import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import AboutUs from "./pages/AboutUs";
-import InsuranceDetail from "./pages/InsuranceDetail";
-import DynamicPage from "./pages/DynamicPage";
-import TeamPage from "./pages/TeamPage";
-import MediaPage from "./pages/MediaPage";
-import PartnersPage from "./pages/PartnersPage";
-import ShareholdersPage from "./pages/ShareholdersPage";
-import AdminDashboard from "./pages/admin/Dashboard";
-import HeroSlidesPage from "./pages/admin/HeroSlides";
-import ContactMessagesPage from "./pages/admin/ContactMessages";
-import InsuranceTypesPage from "./pages/admin/InsuranceTypes";
-import StatisticsPage from "./pages/admin/Statistics";
-import AdminPartnersPage from "./pages/admin/Partners";
-import BranchesPage from "./pages/admin/Branches";
-import NewsPage from "./pages/admin/News";
-import WhyUsPage from "./pages/admin/WhyUs";
-import AboutContentPage from "./pages/admin/AboutContent";
-import SiteSettingsPage from "./pages/admin/SiteSettings";
-import LoginPage from "./pages/Login";
-import AdminPagesPage from "./pages/admin/DynamicPages";
-import AdminTeamPage from "./pages/admin/TeamMembers";
-import AdminMediaPage from "./pages/admin/MediaItems";
 import { WhatsAppButton } from "./components/WhatsAppButton";
-import BranchesPublicPage from "./pages/Branches";
+
+// Eagerly load the home page and login for fast initial render
+import Home from "./pages/Home";
+import LoginPage from "./pages/Login";
+
+// Lazy load all other pages for better performance
+const NotFound = lazy(() => import("@/pages/NotFound"));
+const Contact = lazy(() => import("./pages/Contact"));
+const AboutUs = lazy(() => import("./pages/AboutUs"));
+const InsuranceDetail = lazy(() => import("./pages/InsuranceDetail"));
+const DynamicPage = lazy(() => import("./pages/DynamicPage"));
+const TeamPage = lazy(() => import("./pages/TeamPage"));
+const MediaPage = lazy(() => import("./pages/MediaPage"));
+const PartnersPage = lazy(() => import("./pages/PartnersPage"));
+const ShareholdersPage = lazy(() => import("./pages/ShareholdersPage"));
+const BranchesPublicPage = lazy(() => import("./pages/Branches"));
+
+// Admin pages - lazy loaded
+const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
+const HeroSlidesPage = lazy(() => import("./pages/admin/HeroSlides"));
+const ContactMessagesPage = lazy(() => import("./pages/admin/ContactMessages"));
+const InsuranceTypesPage = lazy(() => import("./pages/admin/InsuranceTypes"));
+const StatisticsPage = lazy(() => import("./pages/admin/Statistics"));
+const AdminPartnersPage = lazy(() => import("./pages/admin/Partners"));
+const BranchesPage = lazy(() => import("./pages/admin/Branches"));
+const NewsPage = lazy(() => import("./pages/admin/News"));
+const WhyUsPage = lazy(() => import("./pages/admin/WhyUs"));
+const AboutContentPage = lazy(() => import("./pages/admin/AboutContent"));
+const SiteSettingsPage = lazy(() => import("./pages/admin/SiteSettings"));
+const AdminPagesPage = lazy(() => import("./pages/admin/DynamicPages"));
+const AdminTeamPage = lazy(() => import("./pages/admin/TeamMembers"));
+const AdminMediaPage = lazy(() => import("./pages/admin/MediaItems"));
+
+// Loading fallback
+function PageLoader() {
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <div className="w-10 h-10 border-4 border-[#C8A23A] border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+}
 
 function Router() {
   return (
-    <Switch>
-      {/* Login page - no navbar/footer */}
-      <Route path="/login" component={LoginPage} />
-      {/* Admin pages - no public navbar/footer */}
-      <Route path="/admin" component={AdminDashboard} />
-      <Route path="/admin/hero-slides" component={HeroSlidesPage} />
-      <Route path="/admin/contacts" component={ContactMessagesPage} />
-      <Route path="/admin/insurance" component={InsuranceTypesPage} />
-      <Route path="/admin/statistics" component={StatisticsPage} />
-      <Route path="/admin/partners" component={AdminPartnersPage} />
-      <Route path="/admin/branches" component={BranchesPage} />
-      <Route path="/admin/news" component={NewsPage} />
-      <Route path="/admin/why-us" component={WhyUsPage} />
-      <Route path="/admin/about" component={AboutContentPage} />
-      <Route path="/admin/settings" component={SiteSettingsPage} />
-      <Route path="/admin/pages" component={AdminPagesPage} />
-      <Route path="/admin/team" component={AdminTeamPage} />
-      <Route path="/admin/media" component={AdminMediaPage} />
-      {/* All other pages with navbar/footer */}
-      <Route>
-        {() => (
-          <div className="min-h-screen flex flex-col">
-            <Navigation />
-            <main className="flex-1" style={{ marginTop: "90px" }}>
-              <Switch>
-                <Route path={"/"} component={Home} />
-                <Route path={"/contact"} component={Contact} />
+    <Suspense fallback={<PageLoader />}>
+      <Switch>
+        {/* Login page - no navbar/footer */}
+        <Route path="/login" component={LoginPage} />
+        {/* Admin pages - no public navbar/footer */}
+        <Route path="/admin" component={AdminDashboard} />
+        <Route path="/admin/hero-slides" component={HeroSlidesPage} />
+        <Route path="/admin/contacts" component={ContactMessagesPage} />
+        <Route path="/admin/insurance" component={InsuranceTypesPage} />
+        <Route path="/admin/statistics" component={StatisticsPage} />
+        <Route path="/admin/partners" component={AdminPartnersPage} />
+        <Route path="/admin/branches" component={BranchesPage} />
+        <Route path="/admin/news" component={NewsPage} />
+        <Route path="/admin/why-us" component={WhyUsPage} />
+        <Route path="/admin/about" component={AboutContentPage} />
+        <Route path="/admin/settings" component={SiteSettingsPage} />
+        <Route path="/admin/pages" component={AdminPagesPage} />
+        <Route path="/admin/team" component={AdminTeamPage} />
+        <Route path="/admin/media" component={AdminMediaPage} />
+        {/* All other pages with navbar/footer */}
+        <Route>
+          {() => (
+            <div className="min-h-screen flex flex-col">
+              <Navigation />
+              <main className="flex-1" style={{ marginTop: "90px" }}>
+                <Suspense fallback={<PageLoader />}>
+                  <Switch>
+                    <Route path={"/"} component={Home} />
+                    <Route path={"/contact"} component={Contact} />
 
-                {/* About section */}
-                <Route path={"/about/who-we-are"} component={AboutUs} />
-                <Route path={"/about/chairman"}>{() => <DynamicPage slug="about/chairman" />}</Route>
-                <Route path={"/about/vision"}>{() => <DynamicPage slug="about/vision" />}</Route>
-                <Route path={"/about/mission"}>{() => <DynamicPage slug="about/mission" />}</Route>
-                <Route path={"/about/goals"}>{() => <DynamicPage slug="about/goals" />}</Route>
-                <Route path={"/about/structure"}>{() => <DynamicPage slug="about/structure" />}</Route>
-                <Route path={"/about/team"} component={TeamPage} />
-                <Route path={"/about/privacy"}>{() => <DynamicPage slug="about/privacy" />}</Route>
-                <Route path={"/about/cookies"}>{() => <DynamicPage slug="about/cookies" />}</Route>
+                    {/* About section */}
+                    <Route path={"/about/who-we-are"} component={AboutUs} />
+                    <Route path={"/about/chairman"}>{() => <DynamicPage slug="about/chairman" />}</Route>
+                    <Route path={"/about/vision"}>{() => <DynamicPage slug="about/vision" />}</Route>
+                    <Route path={"/about/mission"}>{() => <DynamicPage slug="about/mission" />}</Route>
+                    <Route path={"/about/goals"}>{() => <DynamicPage slug="about/goals" />}</Route>
+                    <Route path={"/about/structure"}>{() => <DynamicPage slug="about/structure" />}</Route>
+                    <Route path={"/about/team"} component={TeamPage} />
+                    <Route path={"/about/privacy"}>{() => <DynamicPage slug="about/privacy" />}</Route>
+                    <Route path={"/about/cookies"}>{() => <DynamicPage slug="about/cookies" />}</Route>
 
-                {/* Insurance types - static routes for known types */}
-                <Route path={"/insurance/health"}>{() => <InsuranceDetail type="health" />}</Route>
-                <Route path={"/insurance/car"}>{() => <InsuranceDetail type="car" />}</Route>
-                <Route path={"/insurance/marine"}>{() => <InsuranceDetail type="marine" />}</Route>
-                <Route path={"/insurance/engineering"}>{() => <InsuranceDetail type="engineering" />}</Route>
-                <Route path={"/insurance/energy"}>{() => <InsuranceDetail type="energy" />}</Route>
-                <Route path={"/insurance/takaful"}>{() => <InsuranceDetail type="takaful" />}</Route>
-                {/* Dynamic insurance route for any slug added via admin panel */}
-                <Route path={"/insurance/:slug"}>{(params) => <InsuranceDetail slug={params.slug} />}</Route>
+                    {/* Insurance types */}
+                    <Route path={"/insurance/:slug"}>{(params) => <InsuranceDetail slug={params.slug} />}</Route>
 
-                {/* Partners section */}
-                <Route path={"/partners/reinsurers"}>{() => <PartnersPage category="reinsurer" />}</Route>
-                <Route path={"/partners/brokers"}>{() => <PartnersPage category="broker" />}</Route>
-                <Route path={"/partners/shareholders"}>{() => <ShareholdersPage />}</Route>
-                <Route path={"/partners/success"}>{() => <DynamicPage slug="partners/success" />}</Route>
+                    {/* Partners section */}
+                    <Route path={"/partners/reinsurers"}>{() => <PartnersPage category="reinsurer" />}</Route>
+                    <Route path={"/partners/brokers"}>{() => <PartnersPage category="broker" />}</Route>
+                    <Route path={"/partners/shareholders"}>{() => <ShareholdersPage />}</Route>
+                    <Route path={"/partners/success"}>{() => <DynamicPage slug="partners/success" />}</Route>
 
-                {/* Media section */}
-                <Route path={"/media/photos"}>{() => <MediaPage type="photo" />}</Route>
-                <Route path={"/media/videos"}>{() => <MediaPage type="video" />}</Route>
-                <Route path={"/media/conferences"}>{() => <MediaPage type="conference" />}</Route>
-                <Route path={"/media/events"}>{() => <MediaPage type="event" />}</Route>
-                <Route path={"/media/news"}>{() => <DynamicPage slug="media/news" />}</Route>
+                    {/* Media section */}
+                    <Route path={"/media/photos"}>{() => <MediaPage type="photo" />}</Route>
+                    <Route path={"/media/videos"}>{() => <MediaPage type="video" />}</Route>
+                    <Route path={"/media/conferences"}>{() => <MediaPage type="conference" />}</Route>
+                    <Route path={"/media/events"}>{() => <MediaPage type="event" />}</Route>
+                    <Route path={"/media/news"}>{() => <DynamicPage slug="media/news" />}</Route>
 
-                {/* Branches */}
-                <Route path={"/about/branches"} component={BranchesPublicPage} />
+                    {/* Branches */}
+                    <Route path={"/about/branches"} component={BranchesPublicPage} />
 
-                {/* Fallback */}
-                <Route path={"/404"} component={NotFound} />
-                <Route component={NotFound} />
-              </Switch>
-            </main>
-            <Footer />
-            <WhatsAppButton />
-          </div>
-        )}
-      </Route>
-    </Switch>
+                    {/* Fallback */}
+                    <Route path={"/404"} component={NotFound} />
+                    <Route component={NotFound} />
+                  </Switch>
+                </Suspense>
+              </main>
+              <Footer />
+              <WhatsAppButton />
+            </div>
+          )}
+        </Route>
+      </Switch>
+    </Suspense>
   );
 }
 

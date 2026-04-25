@@ -156,3 +156,10 @@
 - [x] Update dynamic pages: الرؤية، الرسالة، الأهداف، من نحن، رئيس مجلس الإدارة
 - [x] Add dedicated ShareholdersPage showing partners with percentage badges
 - [x] Add shareholders route /partners/shareholders to Navigation and App.tsx
+
+## Performance & Image Optimization - Round 1
+- [x] Add professional images for all 16 insurance types via S3 upload
+- [x] Add board of directors image to chairman dynamic page
+- [x] Add lazy loading (loading="lazy") to all public-facing images
+- [x] Add code splitting (manualChunks) in vite.config.ts for vendor bundles
+- [x] Convert all page imports to lazy() in App.tsx for faster initial load

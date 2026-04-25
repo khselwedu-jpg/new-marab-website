@@ -52,7 +52,7 @@ export function PartnersSection() {
             >
               {partner.logoUrl && !partner.logoUrl.includes("placeholder") ? (
                 <img
-                  src={partner.logoUrl}
+                  src={partner.logoUrl} loading="lazy"
                   alt={isAr ? partner.nameAr : partner.nameEn}
                   className="max-w-full max-h-full object-contain opacity-60 group-hover:opacity-100 transition-opacity duration-300"
                 />

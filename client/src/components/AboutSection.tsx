@@ -20,7 +20,7 @@ export function AboutSection() {
           {/* Image */}
           <div className="order-2 lg:order-1">
             <img
-              src={imageUrl}
+              src={imageUrl} loading="lazy"
               alt={title}
               className="rounded-lg shadow-xl w-full h-[400px] object-cover"
             />

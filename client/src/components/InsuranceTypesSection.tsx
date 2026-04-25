@@ -48,6 +48,7 @@ export function InsuranceTypesSection() {
                   <img
                     src={type.imageUrl}
                     alt={isAr ? type.titleAr : type.titleEn}
+                    loading="lazy"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-primary/40 group-hover:bg-primary/60 transition-colors" />
