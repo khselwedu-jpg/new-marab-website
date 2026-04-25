@@ -145,3 +145,5 @@
 - [x] Update contact page phone to Aden numbers (+967 02 362 317/318/319)
 - [x] Update address in site_settings and branches table to Madinat Inma, Aden
 - [x] Replace logo with new transparent PNG (logo-new.png) across all pages
+- [x] Update favicon.ico and apple-touch-icon with new logo
+- [x] Update page title to مأرب للتأمين | Mareb Insurance Company
