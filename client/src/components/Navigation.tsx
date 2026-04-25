@@ -78,7 +78,7 @@ export function Navigation() {
         {/* Logo */}
         <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "instant" })} className="flex items-center">
           <img
-            src="/logo.jpg"
+            src="/logo-new.png"
             alt="Mareb Insurance"
             className="h-16 w-auto object-contain"
           />

@@ -61,7 +61,7 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="flex justify-center mb-8">
           <a href="/">
-            <img src="/logo.jpg" alt="Mareb Insurance" className="h-20 w-auto object-contain rounded-lg shadow-lg" />
+            <img src="/logo-new.png" alt="Mareb Insurance" className="h-20 w-auto object-contain rounded-lg shadow-lg" />
           </a>
         </div>
 

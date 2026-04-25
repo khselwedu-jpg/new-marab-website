@@ -53,7 +53,7 @@ export function Footer() {
           <div className="space-y-4">
             <button onClick={() => handleNavClick("/")} className="block">
               <img
-                src="/logo.jpg"
+                src="/logo-new.png"
                 alt="Mareb Insurance"
                 className="h-20 w-auto object-contain mb-4"
               />

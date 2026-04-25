@@ -73,7 +73,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             >
               {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
-            <img src="/logo.jpg" alt="Mareb Insurance" className="h-12 w-auto" />
+            <img src="/logo-new.png" alt="Mareb Insurance" className="h-12 w-auto" />
             <h1 className="text-xl font-bold hidden md:block">Admin Control Panel</h1>
           </div>
           <div className="flex items-center gap-4">
