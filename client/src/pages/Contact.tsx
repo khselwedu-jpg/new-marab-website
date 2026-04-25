@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { trpc } from "@/lib/trpc";
 
 export default function Contact() {
   const { t } = useLanguage();
@@ -17,33 +18,33 @@ export default function Contact() {
     messageType: "",
     message: "",
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitContact = trpc.content.submitContact.useMutation({
+    onSuccess: () => {
+      toast.success(t("contact.success"));
+      setFormData({ name: "", email: "", phone: "", subject: "", messageType: "", message: "" });
+    },
+    onError: () => {
+      toast.error(t("contact.error"));
+    },
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validation
     if (!formData.name || !formData.email || !formData.phone || !formData.subject || !formData.messageType || !formData.message) {
       toast.error(t("contact.error"));
       return;
     }
-
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast.success(t("contact.success"));
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      messageType: "",
-      message: "",
+    submitContact.mutate({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      subject: formData.subject,
+      messageType: formData.messageType as "inquiry" | "quote" | "complaint" | "suggestion",
+      message: formData.message,
     });
-    setIsSubmitting(false);
   };
+
+  const isSubmitting = submitContact.isPending;
 
   return (
     <div>

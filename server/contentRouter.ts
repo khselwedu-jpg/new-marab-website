@@ -17,6 +17,7 @@ import {
   dynamicPages,
   teamMembers,
   mediaItems,
+  contactSubmissions,
 } from "../drizzle/schema";
 import { eq, asc, desc } from "drizzle-orm";
 import { z } from "zod";
@@ -160,4 +161,27 @@ export const contentRouter = router({
       .where(eq(mediaItems.isActive, true))
       .orderBy(desc(mediaItems.publishDate));
   }),
+
+  // Submit contact form
+  submitContact: publicProcedure
+    .input(z.object({
+      name: z.string().min(1),
+      email: z.string().email(),
+      phone: z.string().min(1),
+      subject: z.string().min(1),
+      messageType: z.enum(["inquiry", "quote", "complaint", "suggestion"]),
+      message: z.string().min(1),
+    }))
+    .mutation(async ({ input }) => {
+      await (await db()).insert(contactSubmissions).values({
+        name: input.name,
+        email: input.email,
+        phone: input.phone,
+        subject: input.subject,
+        messageType: input.messageType,
+        message: input.message,
+        status: "new",
+      });
+      return { success: true };
+    }),
 });

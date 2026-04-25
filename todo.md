@@ -138,3 +138,4 @@
 - [x] Hide dynamic pages with no content from navigation menu (filter by pagesWithContentSlugs)
 - [x] Fix footer links not scrolling to top of page when clicked
 - [x] Fix nested anchor tag in AdminLayout.tsx
+- [x] Fix contact form - was simulating submission, now saves to database via trpc.content.submitContact
