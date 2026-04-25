@@ -139,3 +139,5 @@
 - [x] Fix footer links not scrolling to top of page when clicked
 - [x] Fix nested anchor tag in AdminLayout.tsx
 - [x] Fix contact form - was simulating submission, now saves to database via trpc.content.submitContact
+- [x] Add content for Vision, Mission, Goals, and Who We Are dynamic pages
+- [x] Fix Navigation.tsx slugs to use about/ prefix matching database slugs

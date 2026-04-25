@@ -35,15 +35,15 @@ export function Navigation() {
   // About links - filter dynamic pages that have no content
   const aboutLinks = [
     { key: "nav.about.who", href: "/about/who-we-are", dynamic: false },
-    { key: "nav.about.chairman", href: "/about/chairman", dynamic: true, slug: "chairman" },
-    { key: "nav.about.vision", href: "/about/vision", dynamic: true, slug: "vision" },
-    { key: "nav.about.mission", href: "/about/mission", dynamic: true, slug: "mission" },
-    { key: "nav.about.goals", href: "/about/goals", dynamic: true, slug: "goals" },
-    { key: "nav.about.structure", href: "/about/structure", dynamic: true, slug: "structure" },
+    { key: "nav.about.chairman", href: "/about/chairman", dynamic: true, slug: "about/chairman" },
+    { key: "nav.about.vision", href: "/about/vision", dynamic: true, slug: "about/vision" },
+    { key: "nav.about.mission", href: "/about/mission", dynamic: true, slug: "about/mission" },
+    { key: "nav.about.goals", href: "/about/goals", dynamic: true, slug: "about/goals" },
+    { key: "nav.about.structure", href: "/about/structure", dynamic: true, slug: "about/structure" },
     { key: "nav.about.branches", href: "/about/branches", dynamic: false },
     { key: "nav.about.team", href: "/about/team", dynamic: false },
-    { key: "nav.about.privacy", href: "/about/privacy", dynamic: true, slug: "privacy" },
-    { key: "nav.about.cookies", href: "/about/cookies", dynamic: true, slug: "cookies" },
+    { key: "nav.about.privacy", href: "/about/privacy", dynamic: true, slug: "about/privacy" },
+    { key: "nav.about.cookies", href: "/about/cookies", dynamic: true, slug: "about/cookies" },
   ].filter(link => !link.dynamic || hasContent(link.slug!));
 
   const partnerLinks = [
