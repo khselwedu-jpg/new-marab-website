@@ -44,6 +44,9 @@ const translations: Record<Language, Record<string, string>> = {
     "partners.reinsurers": "معيدي التأمين",
     "partners.brokers": "وسطاء التأمين",
     "partners.success": "شركاء النجاح",
+    "partners.shareholders": "المساهمون",
+    "partners.shareholdersTitle": "المساهمون والشركاء",
+    "partners.shareholdersSubtitle": "الشركاء المؤسسون لشركة مأرب اليمنية للتأمين",
     
     // Media Center
     "media.photos": "معرض الصور",
@@ -153,6 +156,9 @@ const translations: Record<Language, Record<string, string>> = {
     "partners.reinsurers": "Reinsurers",
     "partners.brokers": "Insurance Brokers",
     "partners.success": "Success Partners",
+    "partners.shareholders": "Shareholders",
+    "partners.shareholdersTitle": "Shareholders & Partners",
+    "partners.shareholdersSubtitle": "Founding partners of Mareb Yemeni Insurance Company",
     
     // Media Center
     "media.photos": "Photo Gallery",

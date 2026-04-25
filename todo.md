@@ -147,3 +147,12 @@
 - [x] Replace logo with new transparent PNG (logo-new.png) across all pages
 - [x] Update favicon.ico and apple-touch-icon with new logo
 - [x] Update page title to مأرب للتأمين | Mareb Insurance Company
+
+## Content Population - Round 1
+- [x] Seed all company content from uploaded document (تعريف-نبذهعنالشركةبعدالتعديل.doc)
+- [x] Add 3 branch managers to team: رمزي أحمد البناء، عبدالعفار شجاع، عبدالعزيز بازارا
+- [x] Add 5 shareholders/partners with percentages (البنك اليمني 53.37%, الأسودي 10.50%, العديني 8.75%, هائل سعيد 5.50%, أفراد 21.88%)
+- [x] Add 16 insurance types with full Arabic descriptions and details
+- [x] Update dynamic pages: الرؤية، الرسالة، الأهداف، من نحن، رئيس مجلس الإدارة
+- [x] Add dedicated ShareholdersPage showing partners with percentage badges
+- [x] Add shareholders route /partners/shareholders to Navigation and App.tsx

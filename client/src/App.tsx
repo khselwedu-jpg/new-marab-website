@@ -15,6 +15,7 @@ import DynamicPage from "./pages/DynamicPage";
 import TeamPage from "./pages/TeamPage";
 import MediaPage from "./pages/MediaPage";
 import PartnersPage from "./pages/PartnersPage";
+import ShareholdersPage from "./pages/ShareholdersPage";
 import AdminDashboard from "./pages/admin/Dashboard";
 import HeroSlidesPage from "./pages/admin/HeroSlides";
 import ContactMessagesPage from "./pages/admin/ContactMessages";
@@ -87,6 +88,7 @@ function Router() {
                 {/* Partners section */}
                 <Route path={"/partners/reinsurers"}>{() => <PartnersPage category="reinsurer" />}</Route>
                 <Route path={"/partners/brokers"}>{() => <PartnersPage category="broker" />}</Route>
+                <Route path={"/partners/shareholders"}>{() => <ShareholdersPage />}</Route>
                 <Route path={"/partners/success"}>{() => <DynamicPage slug="partners/success" />}</Route>
 
                 {/* Media section */}

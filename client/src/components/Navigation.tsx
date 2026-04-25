@@ -49,6 +49,7 @@ export function Navigation() {
   const partnerLinks = [
     { key: "partners.reinsurers", href: "/partners/reinsurers" },
     { key: "partners.brokers", href: "/partners/brokers" },
+    { key: "partners.shareholders", href: "/partners/shareholders" },
     { key: "partners.success", href: "/partners/success" },
   ];
 
