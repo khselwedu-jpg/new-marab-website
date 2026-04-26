@@ -76,9 +76,13 @@ export const contentRouter = router({
   }),
 
   news: publicProcedure.query(async () => {
-    return (await db()).select().from(news)
-      .where(eq(news.isActive, true))
-      .orderBy(desc(news.publishDate));
+    try {
+      return (await db()).select().from(news)
+        .where(eq(news.isActive, true))
+        .orderBy(desc(news.createdAt));
+    } catch {
+      return [];
+    }
   }),
 
   newsById: publicProcedure
@@ -151,15 +155,23 @@ export const contentRouter = router({
   mediaByType: publicProcedure
     .input(z.object({ type: z.enum(["photo", "video", "conference", "event"]) }))
     .query(async ({ input }) => {
-      return (await db()).select().from(mediaItems)
-        .where(eq(mediaItems.mediaType, input.type))
-        .orderBy(desc(mediaItems.publishDate));
+      try {
+        return (await db()).select().from(mediaItems)
+          .where(eq(mediaItems.mediaType, input.type))
+          .orderBy(desc(mediaItems.createdAt));
+      } catch {
+        return [];
+      }
     }),
 
   allMedia: publicProcedure.query(async () => {
-    return (await db()).select().from(mediaItems)
-      .where(eq(mediaItems.isActive, true))
-      .orderBy(desc(mediaItems.publishDate));
+    try {
+      return (await db()).select().from(mediaItems)
+        .where(eq(mediaItems.isActive, true))
+        .orderBy(desc(mediaItems.createdAt));
+    } catch {
+      return [];
+    }
   }),
 
   // Submit contact form
