@@ -135,16 +135,28 @@ export function Footer() {
             </h3>
             <ul className="space-y-2">
               {insuranceTypes.length > 0 ? (
-                insuranceTypes.map((type) => (
-                  <li key={type.id}>
-                    <button
-                      onClick={() => handleNavClick(`/insurance/${type.slug}`)}
-                      className="text-white/80 hover:text-secondary transition-colors text-sm text-right w-full"
-                    >
-                      {isAr ? type.titleAr : type.titleEn}
-                    </button>
-                  </li>
-                ))
+                <>
+                  {insuranceTypes.slice(0, 4).map((type) => (
+                    <li key={type.id}>
+                      <button
+                        onClick={() => handleNavClick(`/insurance/${type.slug}`)}
+                        className="text-white/80 hover:text-secondary transition-colors text-sm text-right w-full"
+                      >
+                        {isAr ? type.titleAr : type.titleEn}
+                      </button>
+                    </li>
+                  ))}
+                  {insuranceTypes.length > 4 && (
+                    <li>
+                      <button
+                        onClick={() => handleNavClick("/insurance")}
+                        className="text-secondary hover:text-secondary/80 transition-colors text-sm font-semibold text-right w-full"
+                      >
+                        {isAr ? "المزيد..." : "More..."}
+                      </button>
+                    </li>
+                  )}
+                </>
               ) : (
                 // Fallback static links
                 [
@@ -152,8 +164,6 @@ export function Footer() {
                   { label: isAr ? "تأمين السيارات" : "Car Insurance", href: "/insurance/car" },
                   { label: isAr ? "التأمين البحري" : "Marine Insurance", href: "/insurance/marine" },
                   { label: isAr ? "التأمين الهندسي" : "Engineering Insurance", href: "/insurance/engineering" },
-                  { label: isAr ? "تأمين الطاقة" : "Energy Insurance", href: "/insurance/energy" },
-                  { label: isAr ? "التأمين التكافلي" : "Takaful Insurance", href: "/insurance/takaful" },
                 ].map((link) => (
                   <li key={link.href}>
                     <button
