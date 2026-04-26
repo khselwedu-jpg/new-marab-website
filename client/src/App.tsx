@@ -18,6 +18,7 @@ const NotFound = lazy(() => import("@/pages/NotFound"));
 const Contact = lazy(() => import("./pages/Contact"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
 const InsuranceDetail = lazy(() => import("./pages/InsuranceDetail"));
+const InsuranceList = lazy(() => import("./pages/InsuranceList"));
 const DynamicPage = lazy(() => import("./pages/DynamicPage"));
 const TeamPage = lazy(() => import("./pages/TeamPage"));
 const MediaPage = lazy(() => import("./pages/MediaPage"));
@@ -94,6 +95,7 @@ function Router() {
                     <Route path={"/about/cookies"}>{() => <DynamicPage slug="about/cookies" />}</Route>
 
                     {/* Insurance types */}
+                    <Route path="/insurance" component={InsuranceList} />
                     <Route path={"/insurance/:slug"}>{(params) => <InsuranceDetail slug={params.slug} />}</Route>
 
                     {/* Partners section */}
