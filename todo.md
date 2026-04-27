@@ -163,3 +163,18 @@
 - [x] Add lazy loading (loading="lazy") to all public-facing images
 - [x] Add code splitting (manualChunks) in vite.config.ts for vendor bundles
 - [x] Convert all page imports to lazy() in App.tsx for faster initial load
+
+## Performance & Theme - Round 2
+- [ ] Self-host Cairo font (remove Google Fonts external request)
+- [ ] Add font-display: swap to font loading
+- [ ] Add preload hints for critical assets
+- [ ] Optimize hero images: use WebP format, add width/height attributes
+- [ ] Add explicit image dimensions to prevent layout shift (CLS)
+- [ ] Defer non-critical JavaScript
+- [ ] Add meta description and OG tags for SEO
+- [ ] Compress/minify CSS further (remove unused dark mode styles)
+- [ ] Fix Namecheap contact form: verify dist/index.js includes contentRouter
+
+## Theme Changes - Navigation & Footer
+- [x] Change Navigation from dark navy to beige/cream background with navy text
+- [x] Change Footer from dark navy to beige/cream background with navy text

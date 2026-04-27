@@ -24,7 +24,7 @@ export function Footer() {
   const linkedin = getSetting(settings, "social_linkedin", "ar", "");
   const youtube = getSetting(settings, "social_youtube", "ar", "");
 
-  // Contact info from settings (keys match SiteSettings page)
+  // Contact info from settings
   const phone = getSetting(settings, "phone_main", "ar", "+967 1 234 567");
   const email = getSetting(settings, "email_main", "ar", "info@marebinsurance.com");
   const address = isAr
@@ -46,7 +46,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-primary text-white">
+    <footer className="bg-[#F5F0E8] border-t-4 border-secondary">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Column 1: Logo and Social Media */}
@@ -56,53 +56,56 @@ export function Footer() {
                 src="/logo-new.png"
                 alt="Mareb Insurance"
                 className="h-20 w-auto object-contain mb-4"
+                loading="lazy"
+                width="200"
+                height="80"
               />
             </button>
-            <p className="text-white/80 text-sm leading-relaxed">
+            <p className="text-primary/70 text-sm leading-relaxed">
               {t("footer.aboutText")}
             </p>
             <div className="flex gap-3 pt-2 flex-wrap">
               {facebook && (
                 <a href={facebook} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary flex items-center justify-center transition-colors">
-                  <Facebook className="w-5 h-5 text-secondary hover:text-primary" />
+                  className="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary flex items-center justify-center transition-colors group">
+                  <Facebook className="w-5 h-5 text-primary group-hover:text-primary" />
                 </a>
               )}
               {twitter && (
                 <a href={twitter} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary flex items-center justify-center transition-colors">
-                  <Twitter className="w-5 h-5 text-secondary hover:text-primary" />
+                  className="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary flex items-center justify-center transition-colors group">
+                  <Twitter className="w-5 h-5 text-primary group-hover:text-primary" />
                 </a>
               )}
               {instagram && (
                 <a href={instagram} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary flex items-center justify-center transition-colors">
-                  <Instagram className="w-5 h-5 text-secondary hover:text-primary" />
+                  className="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary flex items-center justify-center transition-colors group">
+                  <Instagram className="w-5 h-5 text-primary group-hover:text-primary" />
                 </a>
               )}
               {linkedin && (
                 <a href={linkedin} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary flex items-center justify-center transition-colors">
-                  <Linkedin className="w-5 h-5 text-secondary hover:text-primary" />
+                  className="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary flex items-center justify-center transition-colors group">
+                  <Linkedin className="w-5 h-5 text-primary group-hover:text-primary" />
                 </a>
               )}
               {youtube && (
                 <a href={youtube} target="_blank" rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-secondary/20 hover:bg-secondary flex items-center justify-center transition-colors">
-                  <Youtube className="w-5 h-5 text-secondary hover:text-primary" />
+                  className="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary flex items-center justify-center transition-colors group">
+                  <Youtube className="w-5 h-5 text-primary group-hover:text-primary" />
                 </a>
               )}
               {/* Fallback icons when no settings yet */}
               {!facebook && !twitter && !instagram && !linkedin && !youtube && (
                 <>
-                  <span className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
-                    <Facebook className="w-5 h-5 text-secondary/40" />
+                  <span className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Facebook className="w-5 h-5 text-primary/40" />
                   </span>
-                  <span className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
-                    <Twitter className="w-5 h-5 text-secondary/40" />
+                  <span className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Twitter className="w-5 h-5 text-primary/40" />
                   </span>
-                  <span className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
-                    <Instagram className="w-5 h-5 text-secondary/40" />
+                  <span className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <Instagram className="w-5 h-5 text-primary/40" />
                   </span>
                 </>
               )}
@@ -111,7 +114,7 @@ export function Footer() {
 
           {/* Column 2: Quick Links */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary pb-2">
+            <h3 className="text-xl font-bold text-primary border-b-2 border-secondary pb-2">
               {t("footer.quickLinks")}
             </h3>
             <ul className="space-y-2">
@@ -119,8 +122,9 @@ export function Footer() {
                 <li key={link.href}>
                   <button
                     onClick={() => handleNavClick(link.href)}
-                    className="text-white/80 hover:text-secondary transition-colors text-sm text-right w-full"
+                    className="text-primary/70 hover:text-secondary transition-colors text-sm text-right w-full flex items-center gap-2"
                   >
+                    <span className="text-secondary text-xs">◀</span>
                     {link.label}
                   </button>
                 </li>
@@ -130,7 +134,7 @@ export function Footer() {
 
           {/* Column 3: Insurance Types (dynamic) */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary pb-2">
+            <h3 className="text-xl font-bold text-primary border-b-2 border-secondary pb-2">
               {t("footer.insuranceTypes")}
             </h3>
             <ul className="space-y-2">
@@ -140,8 +144,9 @@ export function Footer() {
                     <li key={type.id}>
                       <button
                         onClick={() => handleNavClick(`/insurance/${type.slug}`)}
-                        className="text-white/80 hover:text-secondary transition-colors text-sm text-right w-full"
+                        className="text-primary/70 hover:text-secondary transition-colors text-sm text-right w-full flex items-center gap-2"
                       >
+                        <span className="text-secondary text-xs">◀</span>
                         {isAr ? type.titleAr : type.titleEn}
                       </button>
                     </li>
@@ -158,7 +163,6 @@ export function Footer() {
                   )}
                 </>
               ) : (
-                // Fallback static links
                 [
                   { label: isAr ? "التأمين الصحي" : "Health Insurance", href: "/insurance/health" },
                   { label: isAr ? "تأمين السيارات" : "Car Insurance", href: "/insurance/car" },
@@ -168,8 +172,9 @@ export function Footer() {
                   <li key={link.href}>
                     <button
                       onClick={() => handleNavClick(link.href)}
-                      className="text-white/80 hover:text-secondary transition-colors text-sm text-right w-full"
+                      className="text-primary/70 hover:text-secondary transition-colors text-sm text-right w-full flex items-center gap-2"
                     >
+                      <span className="text-secondary text-xs">◀</span>
                       {link.label}
                     </button>
                   </li>
@@ -180,16 +185,18 @@ export function Footer() {
 
           {/* Column 4: Contact Info (dynamic) */}
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-secondary border-b-2 border-secondary pb-2">
+            <h3 className="text-xl font-bold text-primary border-b-2 border-secondary pb-2">
               {t("footer.contactInfo")}
             </h3>
             <div className="space-y-3">
               {phone && (
                 <div className="flex items-start gap-3">
-                  <Phone className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <div className="w-9 h-9 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Phone className="w-4 h-4 text-secondary" />
+                  </div>
                   <div>
-                    <div className="text-sm font-semibold text-secondary">{t("footer.phone")}</div>
-                    <a href={`tel:${phone}`} dir="ltr" className="text-white/80 hover:text-secondary text-sm">
+                    <div className="text-sm font-semibold text-primary">{t("footer.phone")}</div>
+                    <a href={`tel:${phone}`} dir="ltr" className="text-primary/70 hover:text-secondary text-sm">
                       {phone}
                     </a>
                   </div>
@@ -197,10 +204,12 @@ export function Footer() {
               )}
               {email && (
                 <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <div className="w-9 h-9 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Mail className="w-4 h-4 text-secondary" />
+                  </div>
                   <div>
-                    <div className="text-sm font-semibold text-secondary">{t("footer.email")}</div>
-                    <a href={`mailto:${email}`} className="text-white/80 hover:text-secondary text-sm">
+                    <div className="text-sm font-semibold text-primary">{t("footer.email")}</div>
+                    <a href={`mailto:${email}`} className="text-primary/70 hover:text-secondary text-sm">
                       {email}
                     </a>
                   </div>
@@ -208,10 +217,12 @@ export function Footer() {
               )}
               {address && (
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-secondary flex-shrink-0 mt-0.5" />
+                  <div className="w-9 h-9 rounded-full bg-secondary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <MapPin className="w-4 h-4 text-secondary" />
+                  </div>
                   <div>
-                    <div className="text-sm font-semibold text-secondary">{t("footer.address")}</div>
-                    <p className="text-white/80 text-sm">{address}</p>
+                    <div className="text-sm font-semibold text-primary">{t("footer.address")}</div>
+                    <p className="text-primary/70 text-sm">{address}</p>
                   </div>
                 </div>
               )}
@@ -221,9 +232,13 @@ export function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="border-t border-white/10">
-        <div className="container py-6 text-center">
-          <p className="text-white/60 text-sm">{t("footer.copyright")}</p>
+      <div className="border-t-2 border-secondary/30 bg-[#EDE8DC]">
+        <div className="container py-5 flex flex-col md:flex-row items-center justify-between gap-2">
+          <p className="text-primary/60 text-sm">{t("footer.copyright")}</p>
+          <div className="flex items-center gap-1">
+            <span className="text-secondary font-bold text-lg">◆</span>
+            <span className="text-primary/60 text-xs">{isAr ? "شركة مأرب للتأمين" : "Mareb Insurance"}</span>
+          </div>
         </div>
       </div>
     </footer>

@@ -71,7 +71,9 @@ export function Navigation() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-primary shadow-lg" : "bg-primary"
+        isScrolled
+          ? "bg-[#F5F0E8] shadow-md border-b border-[#C8A23A]/30"
+          : "bg-[#F5F0E8] border-b border-[#C8A23A]/20"
       }`}
       style={{ height: "90px" }}
     >
@@ -82,12 +84,19 @@ export function Navigation() {
             src="/logo-new.png"
             alt="Mareb Insurance"
             className="h-16 w-auto object-contain"
+            width="200"
+            height="64"
+            fetchPriority="high"
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden lg:flex items-center gap-8">
-          <Link href="/" className="text-white hover:text-secondary transition-colors" onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}>
+        <div className="hidden lg:flex items-center gap-6">
+          <Link
+            href="/"
+            className="text-primary font-semibold hover:text-secondary transition-colors text-sm"
+            onClick={() => window.scrollTo({ top: 0, behavior: "instant" })}
+          >
             {t("nav.home")}
           </Link>
 
@@ -97,20 +106,20 @@ export function Navigation() {
             onMouseEnter={() => setOpenDropdown("about")}
             onMouseLeave={() => setOpenDropdown(null)}
           >
-            <button className="text-white hover:text-secondary transition-colors flex items-center gap-1">
+            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm">
               {t("nav.about")}
               <ChevronDown className="w-4 h-4" />
             </button>
             {openDropdown === "about" && (
-              <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-xl py-4 px-2 min-w-[280px] animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 bg-[#F5F0E8] border border-[#C8A23A]/30 rounded-lg shadow-xl py-4 px-2 min-w-[280px] animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="border-b-2 border-secondary pb-2 mb-2">
-                  <h3 className="text-primary font-semibold px-4">{t("nav.about")}</h3>
+                  <h3 className="text-primary font-bold px-4 text-sm">{t("nav.about")}</h3>
                 </div>
                 {aboutLinks.map((link) => (
                   <button
                     key={link.key}
                     onClick={() => handleNavClick(link.href)}
-                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-muted rounded transition-colors"
+                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-[#EDE8DC] rounded transition-colors text-sm"
                   >
                     {t(link.key)}
                   </button>
@@ -125,28 +134,27 @@ export function Navigation() {
             onMouseEnter={() => setOpenDropdown("insurance")}
             onMouseLeave={() => setOpenDropdown(null)}
           >
-            <button className="text-white hover:text-secondary transition-colors flex items-center gap-1">
+            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm">
               {t("nav.insurance")}
               <ChevronDown className="w-4 h-4" />
             </button>
             {openDropdown === "insurance" && (
-              <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-xl py-4 px-2 min-w-[320px] grid grid-cols-2 gap-1 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 bg-[#F5F0E8] border border-[#C8A23A]/30 rounded-lg shadow-xl py-4 px-2 min-w-[320px] grid grid-cols-2 gap-1 animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="col-span-2 border-b-2 border-secondary pb-2 mb-2">
-                  <h3 className="text-primary font-semibold px-4">{t("nav.insurance")}</h3>
+                  <h3 className="text-primary font-bold px-4 text-sm">{t("nav.insurance")}</h3>
                 </div>
                 {insuranceTypesList.length > 0 ? (
                   insuranceTypesList.map((type) => (
                     <button
                       key={type.id}
                       onClick={() => handleNavClick(`/insurance/${type.slug}`)}
-                      className="px-4 py-2 text-primary hover:text-secondary hover:bg-muted rounded transition-colors flex items-center gap-2 text-sm text-right"
+                      className="px-4 py-2 text-primary hover:text-secondary hover:bg-[#EDE8DC] rounded transition-colors flex items-center gap-2 text-sm text-right"
                     >
                       <span className="text-secondary flex-shrink-0">●</span>
                       {language === "ar" ? type.titleAr : type.titleEn}
                     </button>
                   ))
                 ) : (
-                  // Fallback while loading
                   <div className="col-span-2 px-4 py-2 text-muted-foreground text-sm">
                     {language === "ar" ? "جاري التحميل..." : "Loading..."}
                   </div>
@@ -161,20 +169,20 @@ export function Navigation() {
             onMouseEnter={() => setOpenDropdown("partners")}
             onMouseLeave={() => setOpenDropdown(null)}
           >
-            <button className="text-white hover:text-secondary transition-colors flex items-center gap-1">
+            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm">
               {t("nav.partners")}
               <ChevronDown className="w-4 h-4" />
             </button>
             {openDropdown === "partners" && (
-              <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-xl py-4 px-2 min-w-[250px] animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 bg-[#F5F0E8] border border-[#C8A23A]/30 rounded-lg shadow-xl py-4 px-2 min-w-[250px] animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="border-b-2 border-secondary pb-2 mb-2">
-                  <h3 className="text-primary font-semibold px-4">{t("nav.partners")}</h3>
+                  <h3 className="text-primary font-bold px-4 text-sm">{t("nav.partners")}</h3>
                 </div>
                 {partnerLinks.map((link) => (
                   <button
                     key={link.key}
                     onClick={() => handleNavClick(link.href)}
-                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-muted rounded transition-colors"
+                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-[#EDE8DC] rounded transition-colors text-sm"
                   >
                     {t(link.key)}
                   </button>
@@ -189,20 +197,20 @@ export function Navigation() {
             onMouseEnter={() => setOpenDropdown("media")}
             onMouseLeave={() => setOpenDropdown(null)}
           >
-            <button className="text-white hover:text-secondary transition-colors flex items-center gap-1">
+            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm">
               {t("nav.media")}
               <ChevronDown className="w-4 h-4" />
             </button>
             {openDropdown === "media" && (
-              <div className="absolute top-full left-0 mt-2 bg-white rounded-lg shadow-xl py-4 px-2 min-w-[280px] animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 bg-[#F5F0E8] border border-[#C8A23A]/30 rounded-lg shadow-xl py-4 px-2 min-w-[280px] animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="border-b-2 border-secondary pb-2 mb-2">
-                  <h3 className="text-primary font-semibold px-4">{t("nav.media")}</h3>
+                  <h3 className="text-primary font-bold px-4 text-sm">{t("nav.media")}</h3>
                 </div>
                 {mediaLinks.map((link) => (
                   <button
                     key={link.key}
                     onClick={() => handleNavClick(link.href)}
-                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-muted rounded transition-colors"
+                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-[#EDE8DC] rounded transition-colors text-sm"
                   >
                     {t(link.key)}
                   </button>
@@ -213,7 +221,7 @@ export function Navigation() {
 
           <button
             onClick={() => handleNavClick("/contact")}
-            className="text-white hover:text-secondary transition-colors"
+            className="text-primary font-semibold hover:text-secondary transition-colors text-sm"
           >
             {t("nav.contact")}
           </button>
@@ -223,7 +231,7 @@ export function Navigation() {
             variant="outline"
             size="sm"
             onClick={toggleLanguage}
-            className="bg-transparent border-white text-white hover:bg-secondary hover:text-primary hover:border-secondary"
+            className="border-primary text-primary bg-transparent hover:bg-secondary hover:text-primary hover:border-secondary"
           >
             {language === "ar" ? "EN" : "AR"}
           </Button>
@@ -243,7 +251,7 @@ export function Navigation() {
                 variant="outline"
                 size="sm"
                 onClick={() => logout()}
-                className="bg-transparent border-white text-white hover:bg-red-500 hover:border-red-500"
+                className="border-primary text-primary bg-transparent hover:bg-red-500 hover:border-red-500 hover:text-white"
               >
                 <LogOut className="w-4 h-4 mr-1" />
                 {language === "ar" ? "خروج" : "Logout"}
@@ -253,7 +261,7 @@ export function Navigation() {
             <Button
               size="sm"
               onClick={() => window.location.href = getLoginUrl()}
-              className="bg-secondary text-primary hover:bg-secondary/90 font-semibold"
+              className="bg-primary text-white hover:bg-primary/90 font-semibold"
             >
               <LogIn className="w-4 h-4 mr-1" />
               {language === "ar" ? "تسجيل الدخول" : "Login"}
@@ -263,7 +271,7 @@ export function Navigation() {
 
         {/* Mobile Menu Button */}
         <button
-          className="lg:hidden text-white"
+          className="lg:hidden text-primary"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -272,21 +280,21 @@ export function Navigation() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-primary border-t border-white/10 max-h-[calc(100vh-90px)] overflow-y-auto">
+        <div className="lg:hidden bg-[#F5F0E8] border-t border-[#C8A23A]/30 max-h-[calc(100vh-90px)] overflow-y-auto">
           <div className="container py-4 space-y-4">
             <button
-              className="block w-full text-right text-white hover:text-secondary py-2"
+              className="block w-full text-right text-primary font-semibold hover:text-secondary py-2"
               onClick={() => handleNavClick("/")}
             >
               {t("nav.home")}
             </button>
 
             <div className="space-y-2">
-              <div className="text-secondary font-semibold">{t("nav.about")}</div>
+              <div className="text-secondary font-bold border-b border-secondary/30 pb-1">{t("nav.about")}</div>
               {aboutLinks.map((link) => (
                 <button
                   key={link.key}
-                  className="block w-full text-right text-white hover:text-secondary py-1 pl-4"
+                  className="block w-full text-right text-primary hover:text-secondary py-1 pl-4 text-sm"
                   onClick={() => handleNavClick(link.href)}
                 >
                   {t(link.key)}
@@ -295,11 +303,11 @@ export function Navigation() {
             </div>
 
             <div className="space-y-2">
-              <div className="text-secondary font-semibold">{t("nav.insurance")}</div>
+              <div className="text-secondary font-bold border-b border-secondary/30 pb-1">{t("nav.insurance")}</div>
               {insuranceTypesList.map((type) => (
                 <button
                   key={type.id}
-                  className="block w-full text-right text-white hover:text-secondary py-1 pl-4 text-sm"
+                  className="block w-full text-right text-primary hover:text-secondary py-1 pl-4 text-sm"
                   onClick={() => handleNavClick(`/insurance/${type.slug}`)}
                 >
                   {language === "ar" ? type.titleAr : type.titleEn}
@@ -308,11 +316,11 @@ export function Navigation() {
             </div>
 
             <div className="space-y-2">
-              <div className="text-secondary font-semibold">{t("nav.partners")}</div>
+              <div className="text-secondary font-bold border-b border-secondary/30 pb-1">{t("nav.partners")}</div>
               {partnerLinks.map((link) => (
                 <button
                   key={link.key}
-                  className="block w-full text-right text-white hover:text-secondary py-1 pl-4"
+                  className="block w-full text-right text-primary hover:text-secondary py-1 pl-4 text-sm"
                   onClick={() => handleNavClick(link.href)}
                 >
                   {t(link.key)}
@@ -321,11 +329,11 @@ export function Navigation() {
             </div>
 
             <div className="space-y-2">
-              <div className="text-secondary font-semibold">{t("nav.media")}</div>
+              <div className="text-secondary font-bold border-b border-secondary/30 pb-1">{t("nav.media")}</div>
               {mediaLinks.map((link) => (
                 <button
                   key={link.key}
-                  className="block w-full text-right text-white hover:text-secondary py-1 pl-4"
+                  className="block w-full text-right text-primary hover:text-secondary py-1 pl-4 text-sm"
                   onClick={() => handleNavClick(link.href)}
                 >
                   {t(link.key)}
@@ -334,7 +342,7 @@ export function Navigation() {
             </div>
 
             <button
-              className="block w-full text-right text-white hover:text-secondary py-2"
+              className="block w-full text-right text-primary font-semibold hover:text-secondary py-2"
               onClick={() => handleNavClick("/contact")}
             >
               {t("nav.contact")}
@@ -344,7 +352,7 @@ export function Navigation() {
               variant="outline"
               size="sm"
               onClick={toggleLanguage}
-              className="bg-transparent border-white text-white hover:bg-secondary hover:text-primary hover:border-secondary w-full"
+              className="border-primary text-primary bg-transparent hover:bg-secondary hover:text-primary hover:border-secondary w-full"
             >
               {language === "ar" ? "English" : "العربية"}
             </Button>
@@ -364,7 +372,7 @@ export function Navigation() {
                   variant="outline"
                   size="sm"
                   onClick={() => { logout(); setIsMobileMenuOpen(false); }}
-                  className="bg-transparent border-white text-white hover:bg-red-500 hover:border-red-500 w-full"
+                  className="border-primary text-primary bg-transparent hover:bg-red-500 hover:border-red-500 hover:text-white w-full"
                 >
                   <LogOut className="w-4 h-4 mr-1" />
                   {language === "ar" ? "خروج" : "Logout"}
@@ -374,7 +382,7 @@ export function Navigation() {
               <Button
                 size="sm"
                 onClick={() => window.location.href = getLoginUrl()}
-                className="bg-secondary text-primary hover:bg-secondary/90 font-semibold w-full"
+                className="bg-primary text-white hover:bg-primary/90 font-semibold w-full"
               >
                 <LogIn className="w-4 h-4 mr-1" />
                 {language === "ar" ? "تسجيل الدخول" : "Login"}

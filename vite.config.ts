@@ -168,6 +168,8 @@ export default defineConfig({
     outDir: path.resolve(import.meta.dirname, "dist/public"),
     emptyOutDir: true,
     chunkSizeWarningLimit: 600,
+    cssCodeSplit: true,
+    reportCompressedSize: false,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -178,6 +180,7 @@ export default defineConfig({
         },
       },
     },
+    minify: 'esbuild',
   },
   server: {
     host: true,

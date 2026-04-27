@@ -74,6 +74,10 @@ export function HeroSection() {
               src={slide.imageUrl}
               alt={isAr ? slide.titleAr : slide.titleEn}
               className="w-full h-full object-cover"
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "low"}
+              width="1920"
+              height="1080"
             />
             <div className="absolute inset-0 bg-primary/70" />
           </div>

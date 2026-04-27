@@ -28,8 +28,11 @@ export function NewsSection() {
               {item.imageUrl && (
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={item.imageUrl} loading="lazy"
+                    src={item.imageUrl}
                     alt={isAr ? item.titleAr : item.titleEn}
+                    loading="lazy"
+                    width="600"
+                    height="192"
                     className="w-full h-full object-cover"
                   />
                 </div>

@@ -32,6 +32,9 @@ export function BranchesSection() {
                 <img
                   src={branch.imageUrl || "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"}
                   alt={isAr ? branch.nameAr : branch.nameEn}
+                  loading="lazy"
+                  width="600"
+                  height="192"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent" />
