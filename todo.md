@@ -199,6 +199,6 @@
 - [x] Send email to website@myicyemen.com when contact form is submitted
 
 ## Updates - v18
-- [ ] Change contact page email to info@myicyemen.com
-- [ ] Build Namecheap v18 package
-- [ ] Push to GitHub
+- [x] Change contact page email to info@myicyemen.com
+- [x] Build Namecheap v18 package
+- [x] Push to GitHub
