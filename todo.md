@@ -184,3 +184,10 @@
 - [x] Fix TBT: Add React.lazy() for all below-fold home page sections
 - [x] Fix FCP: Preload first hero image in index.html
 - [x] Add preconnect to CDN for faster resource loading
+
+## Performance Optimization - PageSpeed 70 → 90+
+- [x] Fix LCP: LQIP blur-up + responsive srcset + CSS gradient fallback for instant paint
+- [x] Fix TBT: index.js split from 560KB → 120KB (78% smaller) with smart manualChunks
+- [x] Fix TBT: Admin pages separated into own chunk (308KB) - not loaded on public pages
+- [x] Inline critical body/root CSS to prevent FOUC
+- [x] Reduce font weights from 5 to 3 (400, 600, 700) with unicode-range

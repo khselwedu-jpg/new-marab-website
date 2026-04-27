@@ -172,11 +172,39 @@ export default defineConfig({
     reportCompressedSize: false,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-trpc': ['@trpc/client', '@trpc/react-query', '@tanstack/react-query'],
-          'vendor-ui': ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu', '@radix-ui/react-select', '@radix-ui/react-tabs', '@radix-ui/react-tooltip'],
-          'vendor-icons': ['lucide-react'],
+        manualChunks(id) {
+          // Core React runtime - loaded first
+          if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) {
+            return 'vendor-react';
+          }
+          // tRPC + React Query
+          if (id.includes('@trpc/') || id.includes('@tanstack/react-query')) {
+            return 'vendor-trpc';
+          }
+          // Radix UI components
+          if (id.includes('@radix-ui/')) {
+            return 'vendor-ui';
+          }
+          // Icons
+          if (id.includes('lucide-react')) {
+            return 'vendor-icons';
+          }
+          // wouter router
+          if (id.includes('node_modules/wouter')) {
+            return 'vendor-router';
+          }
+          // Zod validation
+          if (id.includes('node_modules/zod')) {
+            return 'vendor-zod';
+          }
+          // i18n / translations
+          if (id.includes('/locales/') || id.includes('/i18n/') || id.includes('translations')) {
+            return 'i18n';
+          }
+          // Admin pages - separate chunk
+          if (id.includes('/pages/admin/')) {
+            return 'admin-pages';
+          }
         },
       },
     },
