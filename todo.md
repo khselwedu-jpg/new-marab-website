@@ -178,3 +178,9 @@
 ## Theme Changes - Navigation & Footer
 - [x] Change Navigation from dark navy to beige/cream background with navy text
 - [x] Change Footer from dark navy to beige/cream background with navy text
+
+## Performance Optimization - PageSpeed 50 → 80+
+- [x] Fix LCP: Replace Unsplash hero images with optimized CDN WebP images (135KB→44KB, 99KB→31KB)
+- [x] Fix TBT: Add React.lazy() for all below-fold home page sections
+- [x] Fix FCP: Preload first hero image in index.html
+- [x] Add preconnect to CDN for faster resource loading

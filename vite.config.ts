@@ -181,6 +181,7 @@ export default defineConfig({
       },
     },
     minify: 'esbuild',
+    target: 'es2015',
   },
   server: {
     host: true,
