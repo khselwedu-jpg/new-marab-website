@@ -4,6 +4,7 @@
  */
 import { publicProcedure, router } from "./_core/trpc";
 import { getDb } from "./db";
+import { sendContactNotification } from "./email";
 import {
   heroSlides,
   insuranceTypes,
@@ -185,6 +186,7 @@ export const contentRouter = router({
       message: z.string().min(1),
     }))
     .mutation(async ({ input }) => {
+      // Save to database
       await (await db()).insert(contactSubmissions).values({
         name: input.name,
         email: input.email,
@@ -194,6 +196,10 @@ export const contentRouter = router({
         message: input.message,
         status: "new",
       });
+      // Send email notification (non-blocking)
+      sendContactNotification(input).catch((err) =>
+        console.error("[Email] Notification error:", err)
+      );
       return { success: true };
     }),
 });

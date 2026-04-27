@@ -194,3 +194,6 @@
 
 ## Bug Fix - Admin Login
 - [x] Auto-create default admin account on server startup if none exists
+
+## Feature - Email Notification on Contact Form
+- [x] Send email to website@myicyemen.com when contact form is submitted
