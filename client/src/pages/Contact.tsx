@@ -217,8 +217,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h4 className="font-semibold text-primary mb-1">{t("footer.email")}</h4>
-                    <a href="mailto:info@marebinsurance.com" className="text-foreground/70 hover:text-secondary">
-                      info@marebinsurance.com
+                    <a href="mailto:info@myicyemen.com" className="text-foreground/70 hover:text-secondary">
+                      info@myicyemen.com
                     </a>
                   </div>
                 </div>

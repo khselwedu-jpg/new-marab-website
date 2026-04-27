@@ -197,3 +197,8 @@
 
 ## Feature - Email Notification on Contact Form
 - [x] Send email to website@myicyemen.com when contact form is submitted
+
+## Updates - v18
+- [ ] Change contact page email to info@myicyemen.com
+- [ ] Build Namecheap v18 package
+- [ ] Push to GitHub

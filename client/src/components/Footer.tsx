@@ -26,7 +26,7 @@ export function Footer() {
 
   // Contact info from settings
   const phone = getSetting(settings, "phone_main", "ar", "+967 1 234 567");
-  const email = getSetting(settings, "email_main", "ar", "info@marebinsurance.com");
+  const email = getSetting(settings, "email_main", "ar", "info@myicyemen.com");
   const address = isAr
     ? getSetting(settings, "address_ar", "ar", "صنعاء، اليمن")
     : getSetting(settings, "address_en", "en", "Sana'a, Yemen");
