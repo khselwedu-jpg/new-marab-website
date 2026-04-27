@@ -46,7 +46,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#F5F0E8] border-t-4 border-secondary">
+    <footer className="bg-[#FAF8F4] border-t-4 border-secondary">
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Column 1: Logo and Social Media */}
@@ -232,7 +232,7 @@ export function Footer() {
       </div>
 
       {/* Copyright */}
-      <div className="border-t-2 border-secondary/30 bg-[#EDE8DC]">
+      <div className="border-t-2 border-secondary/30 bg-[#F0EDE6]">
         <div className="container py-5 flex flex-col md:flex-row items-center justify-between gap-2">
           <p className="text-primary/60 text-sm">{t("footer.copyright")}</p>
           <div className="flex items-center gap-1">
