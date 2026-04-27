@@ -72,8 +72,8 @@ export function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#FAF8F4] shadow-md border-b border-[#C8A23A]/20"
-          : "bg-[#FAF8F4] border-b border-[#C8A23A]/15"
+          ? "bg-[#FDFCFA] shadow-md border-b border-[#C8A23A]/20"
+          : "bg-[#FDFCFA] border-b border-[#C8A23A]/15"
       }`}
       style={{ height: "90px" }}
     >
@@ -111,7 +111,7 @@ export function Navigation() {
               <ChevronDown className="w-4 h-4" />
             </button>
             {openDropdown === "about" && (
-              <div className="absolute top-full left-0 mt-2 bg-[#FAF8F4] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[280px] animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 bg-[#FDFCFA] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[280px] animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="border-b-2 border-secondary pb-2 mb-2">
                   <h3 className="text-primary font-bold px-4 text-sm">{t("nav.about")}</h3>
                 </div>
@@ -119,7 +119,7 @@ export function Navigation() {
                   <button
                     key={link.key}
                     onClick={() => handleNavClick(link.href)}
-                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-[#F0EDE6] rounded transition-colors text-sm"
+                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-[#F5F3EF] rounded transition-colors text-sm"
                   >
                     {t(link.key)}
                   </button>
@@ -139,7 +139,7 @@ export function Navigation() {
               <ChevronDown className="w-4 h-4" />
             </button>
             {openDropdown === "insurance" && (
-              <div className="absolute top-full left-0 mt-2 bg-[#FAF8F4] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[320px] grid grid-cols-2 gap-1 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 bg-[#FDFCFA] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[320px] grid grid-cols-2 gap-1 animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="col-span-2 border-b-2 border-secondary pb-2 mb-2">
                   <h3 className="text-primary font-bold px-4 text-sm">{t("nav.insurance")}</h3>
                 </div>
@@ -148,7 +148,7 @@ export function Navigation() {
                     <button
                       key={type.id}
                       onClick={() => handleNavClick(`/insurance/${type.slug}`)}
-                      className="px-4 py-2 text-primary hover:text-secondary hover:bg-[#F0EDE6] rounded transition-colors flex items-center gap-2 text-sm text-right"
+                      className="px-4 py-2 text-primary hover:text-secondary hover:bg-[#F5F3EF] rounded transition-colors flex items-center gap-2 text-sm text-right"
                     >
                       <span className="text-secondary flex-shrink-0">●</span>
                       {language === "ar" ? type.titleAr : type.titleEn}
@@ -174,7 +174,7 @@ export function Navigation() {
               <ChevronDown className="w-4 h-4" />
             </button>
             {openDropdown === "partners" && (
-              <div className="absolute top-full left-0 mt-2 bg-[#FAF8F4] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[250px] animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 bg-[#FDFCFA] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[250px] animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="border-b-2 border-secondary pb-2 mb-2">
                   <h3 className="text-primary font-bold px-4 text-sm">{t("nav.partners")}</h3>
                 </div>
@@ -182,7 +182,7 @@ export function Navigation() {
                   <button
                     key={link.key}
                     onClick={() => handleNavClick(link.href)}
-                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-[#F0EDE6] rounded transition-colors text-sm"
+                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-[#F5F3EF] rounded transition-colors text-sm"
                   >
                     {t(link.key)}
                   </button>
@@ -202,7 +202,7 @@ export function Navigation() {
               <ChevronDown className="w-4 h-4" />
             </button>
             {openDropdown === "media" && (
-              <div className="absolute top-full left-0 mt-2 bg-[#FAF8F4] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[280px] animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="absolute top-full left-0 mt-2 bg-[#FDFCFA] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[280px] animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="border-b-2 border-secondary pb-2 mb-2">
                   <h3 className="text-primary font-bold px-4 text-sm">{t("nav.media")}</h3>
                 </div>
@@ -210,7 +210,7 @@ export function Navigation() {
                   <button
                     key={link.key}
                     onClick={() => handleNavClick(link.href)}
-                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-[#F0EDE6] rounded transition-colors text-sm"
+                    className="block w-full text-right px-4 py-2 text-primary hover:text-secondary hover:bg-[#F5F3EF] rounded transition-colors text-sm"
                   >
                     {t(link.key)}
                   </button>
@@ -280,7 +280,7 @@ export function Navigation() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#FAF8F4] border-t border-[#C8A23A]/20 max-h-[calc(100vh-90px)] overflow-y-auto">
+        <div className="lg:hidden bg-[#FDFCFA] border-t border-[#C8A23A]/20 max-h-[calc(100vh-90px)] overflow-y-auto">
           <div className="container py-4 space-y-4">
             <button
               className="block w-full text-right text-primary font-semibold hover:text-secondary py-2"
