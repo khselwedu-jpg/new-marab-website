@@ -121,3 +121,24 @@ export async function createAdminAccount(username: string, passwordHash: string,
   if (!db) throw new Error("Database not available");
   await db.insert(adminAccounts).values({ username, passwordHash, name: name || null });
 }
+
+export async function seedDefaultAdmin(): Promise<void> {
+  try {
+    const db = await getDb();
+    if (!db) return;
+    // Check if any admin exists
+    const existing = await db.select().from(adminAccounts).limit(1);
+    if (existing.length > 0) return; // Already seeded
+    // Create default admin: admin / Admin@2024
+    const bcrypt = await import("bcryptjs");
+    const hash = await bcrypt.hash("Admin@2024", 10);
+    await db.insert(adminAccounts).values({
+      username: "admin",
+      passwordHash: hash,
+      name: "مدير النظام",
+    });
+    console.log("[seed] Default admin account created: admin / Admin@2024");
+  } catch (err) {
+    console.error("[seed] Failed to seed admin:", err);
+  }
+}

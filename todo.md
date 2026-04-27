@@ -191,3 +191,6 @@
 - [x] Fix TBT: Admin pages separated into own chunk (308KB) - not loaded on public pages
 - [x] Inline critical body/root CSS to prevent FOUC
 - [x] Reduce font weights from 5 to 3 (400, 600, 700) with unicode-range
+
+## Bug Fix - Admin Login
+- [x] Auto-create default admin account on server startup if none exists
