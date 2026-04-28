@@ -15,8 +15,10 @@ import {
   dynamicPages,
   teamMembers,
   mediaItems,
+  adminAccounts,
 } from "../../drizzle/schema";
 import { count, eq } from "drizzle-orm";
+import bcrypt from "bcryptjs";
 
 // Middleware to check admin role
 const adminProcedure = protectedProcedure.use(({ ctx, next }) => {
@@ -410,6 +412,99 @@ export const adminRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       await db.delete(teamMembers).where(eq(teamMembers.id, input.id));
       return { success: true };
+    }),
+  }),
+
+  // User Management CRUD
+  users: router({
+    list: adminProcedure.query(async () => {
+      const db = await getDb();
+      if (!db) return [];
+      const rows = await db.select({
+        id: adminAccounts.id,
+        username: adminAccounts.username,
+        name: adminAccounts.name,
+        isActive: adminAccounts.isActive,
+        lastSignedIn: adminAccounts.lastSignedIn,
+        createdAt: adminAccounts.createdAt,
+      }).from(adminAccounts);
+      return rows;
+    }),
+    create: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const existing = await db.select().from(adminAccounts).where(eq(adminAccounts.username, input.username)).limit(1);
+      if (existing.length > 0) throw new TRPCError({ code: "CONFLICT", message: "اسم المستخدم موجود مسبقاً" });
+      const hash = await bcrypt.hash(input.password, 10);
+      await db.insert(adminAccounts).values({ username: input.username, passwordHash: hash, name: input.name || null });
+      return { success: true };
+    }),
+    update: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const { id, ...data } = input;
+      const updateData: any = {};
+      if (data.name !== undefined) updateData.name = data.name;
+      if (data.isActive !== undefined) updateData.isActive = data.isActive;
+      if (data.username !== undefined) updateData.username = data.username;
+      await db.update(adminAccounts).set(updateData).where(eq(adminAccounts.id, id));
+      return { success: true };
+    }),
+    changePassword: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      const hash = await bcrypt.hash(input.newPassword, 10);
+      await db.update(adminAccounts).set({ passwordHash: hash }).where(eq(adminAccounts.id, input.id));
+      return { success: true };
+    }),
+    delete: adminProcedure.input((val: any) => val).mutation(async ({ input }: any) => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
+      // Prevent deleting the last admin
+      const allAdmins = await db.select().from(adminAccounts);
+      if (allAdmins.length <= 1) throw new TRPCError({ code: "BAD_REQUEST", message: "لا يمكن حذف المستخدم الأخير" });
+      await db.delete(adminAccounts).where(eq(adminAccounts.id, input.id));
+      return { success: true };
+    }),
+  }),
+
+  // Backup - Export all data
+  backup: router({
+    export: adminProcedure.query(async () => {
+      const db = await getDb();
+      if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
+      const [heroSlidesData, insuranceTypesData, statisticsData, partnersData, branchesData, newsData, contactSubmissionsData, whyUsFeaturesData, aboutContentData, siteSettingsData, dynamicPagesData, teamMembersData] = await Promise.all([
+        db.select().from(heroSlides),
+        db.select().from(insuranceTypes),
+        db.select().from(statistics),
+        db.select().from(partners),
+        db.select().from(branches),
+        db.select().from(news),
+        db.select().from(contactSubmissions),
+        db.select().from(whyUsFeatures),
+        db.select().from(aboutContent),
+        db.select().from(siteSettings),
+        db.select().from(dynamicPages),
+        db.select().from(teamMembers),
+      ]);
+      return {
+        exportedAt: new Date().toISOString(),
+        version: "v18",
+        data: {
+          heroSlides: heroSlidesData,
+          insuranceTypes: insuranceTypesData,
+          statistics: statisticsData,
+          partners: partnersData,
+          branches: branchesData,
+          news: newsData,
+          contactSubmissions: contactSubmissionsData,
+          whyUsFeatures: whyUsFeaturesData,
+          aboutContent: aboutContentData,
+          siteSettings: siteSettingsData,
+          dynamicPages: dynamicPagesData,
+          teamMembers: teamMembersData,
+        },
+      };
     }),
   }),
 

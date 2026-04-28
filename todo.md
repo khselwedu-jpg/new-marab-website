@@ -202,3 +202,9 @@
 - [x] Change contact page email to info@myicyemen.com
 - [x] Build Namecheap v18 package
 - [x] Push to GitHub
+
+## Admin Dashboard - New Features
+- [x] User Management: list/create/edit/delete admin users
+- [x] User Management: change password for admin users
+- [x] Backup: export all site data as JSON file
+- [x] Backup: page in admin dashboard with download button

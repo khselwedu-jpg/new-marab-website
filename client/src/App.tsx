@@ -41,6 +41,8 @@ const SiteSettingsPage = lazy(() => import("./pages/admin/SiteSettings"));
 const AdminPagesPage = lazy(() => import("./pages/admin/DynamicPages"));
 const AdminTeamPage = lazy(() => import("./pages/admin/TeamMembers"));
 const AdminMediaPage = lazy(() => import("./pages/admin/MediaItems"));
+const AdminUsersPage = lazy(() => import("./pages/admin/AdminUsers"));
+const AdminBackupPage = lazy(() => import("./pages/admin/AdminBackup"));
 
 // Loading fallback
 function PageLoader() {
@@ -72,6 +74,8 @@ function Router() {
         <Route path="/admin/pages" component={AdminPagesPage} />
         <Route path="/admin/team" component={AdminTeamPage} />
         <Route path="/admin/media" component={AdminMediaPage} />
+        <Route path="/admin/users" component={AdminUsersPage} />
+        <Route path="/admin/backup" component={AdminBackupPage} />
         {/* All other pages with navbar/footer */}
         <Route>
           {() => (

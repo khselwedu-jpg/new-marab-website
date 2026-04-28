@@ -16,7 +16,9 @@ import {
   X,
   BookOpen,
   UserSquare2,
-  Camera
+  Camera,
+  UserCog,
+  HardDriveDownload
 } from "lucide-react";
 import { useState } from "react";
 
@@ -59,6 +61,8 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     { icon: UserSquare2, label: "Team Members", href: "/admin/team" },
     { icon: Camera, label: "Media Gallery", href: "/admin/media" },
     { icon: Settings, label: "Site Settings", href: "/admin/settings" },
+    { icon: UserCog, label: "إدارة المستخدمين", href: "/admin/users" },
+    { icon: HardDriveDownload, label: "النسخ الاحتياطي", href: "/admin/backup" },
   ];
 
   return (
