@@ -54,9 +54,7 @@ export function InsuranceTypesSection() {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-primary/40 group-hover:bg-primary/60 transition-colors" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <IconComponent className="w-16 h-16 text-white" />
-                  </div>
+
                 </div>
                 <div className="p-6 space-y-4">
                   <h3 className="text-xl font-bold text-primary group-hover:text-secondary transition-colors">
