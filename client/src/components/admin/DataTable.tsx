@@ -28,7 +28,7 @@ export function DataTable<T extends { id: number }>({
     return (
       <div className="text-center py-12">
         <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-        <p className="mt-4 text-foreground/70">Loading...</p>
+        <p className="mt-4 text-foreground/70">جاري التحميل...</p>
       </div>
     );
   }
@@ -36,7 +36,7 @@ export function DataTable<T extends { id: number }>({
   if (!data || data.length === 0) {
     return (
       <div className="text-center py-12 bg-muted rounded-lg">
-        <p className="text-foreground/70">No data available</p>
+        <p className="text-foreground/70">لا توجد بيانات</p>
       </div>
     );
   }
@@ -47,12 +47,12 @@ export function DataTable<T extends { id: number }>({
         <thead className="bg-primary text-white">
           <tr>
             {columns.map((column, index) => (
-              <th key={index} className="px-4 py-3 text-left font-semibold">
+              <th key={index} className="px-4 py-3 text-right font-semibold">
                 {column.label}
               </th>
             ))}
             {(onEdit || onDelete || onView) && (
-              <th className="px-4 py-3 text-right font-semibold">Actions</th>
+              <th className="px-4 py-3 text-right font-semibold">الإجراءات</th>
             )}
           </tr>
         </thead>
