@@ -3,15 +3,43 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { Loader2, Building2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
+function getSetting(
+  settings: { key: string; valueAr: string | null; valueEn: string | null }[],
+  key: string,
+  lang: "ar" | "en",
+  fallback = ""
+) {
+  const row = settings.find((s) => s.key === key);
+  if (!row) return fallback;
+  return (lang === "ar" ? row.valueAr : row.valueEn) ?? row.valueAr ?? row.valueEn ?? fallback;
+}
+
 export default function ShareholdersPage() {
   const { language } = useLanguage();
   const isAr = language === "ar";
   const { data: partnersList, isLoading } = trpc.content.partnersByCategory.useQuery({ category: "other" });
+  const { data: settings = [] } = trpc.content.settings.useQuery();
 
-  const title = isAr ? "المساهمون والشركاء" : "Shareholders & Partners";
-  const subtitle = isAr
-    ? "الشركاء المؤسسون لشركة مأرب اليمنية للتأمين منذ عام 1974م"
-    : "Founding partners of Mareb Yemeni Insurance Company since 1974";
+  // Dynamic page texts from settings (with fallbacks)
+  const pageTitle = isAr
+    ? getSetting(settings, "shareholders_page_title_ar", "ar", "المساهمون والشركاء")
+    : getSetting(settings, "shareholders_page_title_en", "en", "Shareholders & Partners");
+
+  const pageSubtitle = isAr
+    ? getSetting(settings, "shareholders_page_subtitle_ar", "ar", "الشركاء المؤسسون لشركة مأرب اليمنية للتأمين منذ عام 1974م")
+    : getSetting(settings, "shareholders_page_subtitle_en", "en", "Founding partners of Mareb Yemeni Insurance Company since 1974");
+
+  const capitalTitle = isAr
+    ? getSetting(settings, "shareholders_capital_title_ar", "ar", "رأس المال")
+    : getSetting(settings, "shareholders_capital_title_en", "en", "Capital");
+
+  const capitalAmount = isAr
+    ? getSetting(settings, "shareholders_capital_amount_ar", "ar", "مليار ريال يمني")
+    : getSetting(settings, "shareholders_capital_amount_en", "en", "One Billion Yemeni Riyals");
+
+  const capitalDesc = isAr
+    ? getSetting(settings, "shareholders_capital_desc_ar", "ar", "يمثل كل 10% من الأسهم عضو في مجلس الإدارة")
+    : getSetting(settings, "shareholders_capital_desc_en", "en", "Every 10% of shares represents one board member");
 
   if (isLoading) {
     return (
@@ -26,31 +54,29 @@ export default function ShareholdersPage() {
       {/* Hero */}
       <div className="relative py-20 bg-primary text-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
-          <p className="text-white/80 text-lg mb-4">{subtitle}</p>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">{pageTitle}</h1>
+          <p className="text-white/80 text-lg mb-4">{pageSubtitle}</p>
           <div className="flex items-center justify-center gap-2 text-white/70 text-sm">
             <a href="/" className="hover:text-white transition-colors">
               {isAr ? "الرئيسية" : "Home"}
             </a>
             <span>/</span>
-            <span className="text-secondary">{title}</span>
+            <span className="text-secondary">{pageTitle}</span>
           </div>
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-16">
-        {/* Company capital info */}
+        {/* Company capital info - fully dynamic */}
         <div className="bg-primary/5 border border-primary/20 rounded-2xl p-6 mb-12 text-center">
           <h2 className="text-2xl font-bold text-primary mb-2">
-            {isAr ? "رأس المال" : "Capital"}
+            {capitalTitle}
           </h2>
           <p className="text-3xl font-bold text-secondary">
-            {isAr ? "مليار ريال يمني" : "One Billion Yemeni Riyals"}
+            {capitalAmount}
           </p>
           <p className="text-muted-foreground mt-2 text-sm">
-            {isAr
-              ? "يمثل كل 10% من الأسهم عضو في مجلس الإدارة"
-              : "Every 10% of shares represents one board member"}
+            {capitalDesc}
           </p>
         </div>
 

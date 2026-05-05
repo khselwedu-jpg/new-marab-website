@@ -208,3 +208,8 @@
 - [x] User Management: change password for admin users
 - [x] Backup: export all site data as JSON file
 - [x] Backup: page in admin dashboard with download button
+
+## Dynamic Pages - Round 2
+- [x] Shareholders page: capital card (title, amount, description) dynamic from admin via site_settings
+- [x] About Us page: intro text, history, values, commitments, statistics dynamic from admin
+- [x] Admin: add AboutUs section to SiteSettings for managing about page content
