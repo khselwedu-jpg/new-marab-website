@@ -35,8 +35,8 @@ export function ImageUpload({ value, onChange, label = "الصورة", className
       });
 
       if (!res.ok) {
-        const err = await res.json().catch(() => ({ error: "Upload failed" }));
-        throw new Error(err.error || "Upload failed");
+        const err = await res.json().catch(() => ({ error: "فشل رفع الصورة" }));
+        throw new Error(err.error || "فشل رفع الصورة");
       }
 
       const { url } = await res.json();

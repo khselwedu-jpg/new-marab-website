@@ -30,6 +30,11 @@ const settingsConfig: SettingField[] = [
   { key: "social_linkedin", labelAr: "لينكدإن", labelEn: "LinkedIn URL", category: "social" },
   { key: "social_youtube", labelAr: "يوتيوب", labelEn: "YouTube URL", category: "social" },
   { key: "social_instagram", labelAr: "إنستغرام", labelEn: "Instagram URL", category: "social" },
+  // Footer
+  { key: "footer_about_ar", labelAr: "نص الفوتر (عربي)", labelEn: "Footer About Text (Arabic)", category: "footer", multiline: true },
+  { key: "footer_about_en", labelAr: "نص الفوتر (إنجليزي)", labelEn: "Footer About Text (English)", category: "footer", multiline: true },
+  { key: "footer_copyright_ar", labelAr: "نص حقوق النشر (عربي)", labelEn: "Copyright Text (Arabic)", category: "footer" },
+  { key: "footer_copyright_en", labelAr: "نص حقوق النشر (إنجليزي)", labelEn: "Copyright Text (English)", category: "footer" },
   // Company Info
   { key: "company_name_ar", labelAr: "اسم الشركة (عربي)", labelEn: "Company Name (Arabic)", category: "company" },
   { key: "company_name_en", labelAr: "اسم الشركة (إنجليزي)", labelEn: "Company Name (English)", category: "company" },
@@ -42,6 +47,7 @@ const settingsConfig: SettingField[] = [
 const categoryLabels: Record<string, string> = {
   contact: "معلومات التواصل",
   social: "وسائل التواصل الاجتماعي",
+  footer: "إعدادات الفوتر",
   company: "معلومات الشركة",
 };
 

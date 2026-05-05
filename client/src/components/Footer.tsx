@@ -31,6 +31,14 @@ export function Footer() {
     ? getSetting(settings, "address_ar", "ar", "صنعاء، اليمن")
     : getSetting(settings, "address_en", "en", "Sana'a, Yemen");
 
+  // Footer text from settings
+  const footerAbout = isAr
+    ? getSetting(settings, "footer_about_ar", "ar", "")
+    : getSetting(settings, "footer_about_en", "en", "");
+  const footerCopyright = isAr
+    ? getSetting(settings, "footer_copyright_ar", "ar", "")
+    : getSetting(settings, "footer_copyright_en", "en", "");
+
   const quickLinks = [
     { label: isAr ? "الرئيسية" : "Home", href: "/" },
     { label: isAr ? "من نحن" : "Who We Are", href: "/about/who-we-are" },
@@ -62,7 +70,7 @@ export function Footer() {
               />
             </button>
             <p className="text-primary/70 text-sm leading-relaxed">
-              {t("footer.aboutText")}
+              {footerAbout || t("footer.aboutText")}
             </p>
             <div className="flex gap-3 pt-2 flex-wrap">
               {facebook && (
@@ -234,7 +242,7 @@ export function Footer() {
       {/* Copyright */}
       <div className="border-t-2 border-secondary/30 bg-[#F5F3EF]">
         <div className="container py-5 flex flex-col md:flex-row items-center justify-between gap-2">
-          <p className="text-primary/60 text-sm">{t("footer.copyright")}</p>
+          <p className="text-primary/60 text-sm">{footerCopyright || t("footer.copyright")}</p>
           <div className="flex items-center gap-1">
             <span className="text-secondary font-bold text-lg">◆</span>
             <span className="text-primary/60 text-xs">{isAr ? "شركة مأرب للتأمين" : "Mareb Insurance"}</span>
