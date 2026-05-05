@@ -239,14 +239,7 @@ export function Navigation() {
           {/* Login/User Button */}
           {user ? (
             <div className="flex items-center gap-2">
-              {user.role === "admin" && (
-                <Link href="/admin">
-                  <Button size="sm" className="bg-secondary text-primary hover:bg-secondary/90 font-semibold">
-                    <User className="w-4 h-4 mr-1" />
-                    {language === "ar" ? "لوحة الإدارة" : "Admin Panel"}
-                  </Button>
-                </Link>
-              )}
+
               <Button
                 variant="outline"
                 size="sm"
@@ -360,14 +353,7 @@ export function Navigation() {
             {/* Mobile Login/Logout */}
             {user ? (
               <div className="space-y-2">
-                {user.role === "admin" && (
-                  <Link href="/admin" onClick={() => setIsMobileMenuOpen(false)}>
-                    <Button size="sm" className="bg-secondary text-primary hover:bg-secondary/90 font-semibold w-full">
-                      <User className="w-4 h-4 mr-1" />
-                      {language === "ar" ? "لوحة الإدارة" : "Admin Panel"}
-                    </Button>
-                  </Link>
-                )}
+
                 <Button
                   variant="outline"
                   size="sm"
