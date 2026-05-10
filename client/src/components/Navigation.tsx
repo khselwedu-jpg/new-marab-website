@@ -76,6 +76,7 @@ export function Navigation() {
           : "bg-[#FDFCFA] border-b border-[#C8A23A]/15"
       }`}
       style={{ height: "90px" }}
+      aria-label={language === "ar" ? "القائمة الرئيسية" : "Main navigation"}
     >
       <div className="container h-full flex items-center justify-between">
         {/* Logo */}
@@ -106,9 +107,9 @@ export function Navigation() {
             onMouseEnter={() => setOpenDropdown("about")}
             onMouseLeave={() => setOpenDropdown(null)}
           >
-            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm">
+            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm" aria-haspopup="true" aria-expanded={openDropdown === "about"}>
               {t("nav.about")}
-              <ChevronDown className="w-4 h-4" />
+              <ChevronDown className="w-4 h-4" aria-hidden="true" />
             </button>
             {openDropdown === "about" && (
               <div className="absolute top-full left-0 mt-2 bg-[#FDFCFA] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[280px] animate-in fade-in slide-in-from-top-2 duration-200">
@@ -134,9 +135,9 @@ export function Navigation() {
             onMouseEnter={() => setOpenDropdown("insurance")}
             onMouseLeave={() => setOpenDropdown(null)}
           >
-            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm">
+            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm" aria-haspopup="true" aria-expanded={openDropdown === "insurance"}>
               {t("nav.insurance")}
-              <ChevronDown className="w-4 h-4" />
+              <ChevronDown className="w-4 h-4" aria-hidden="true" />
             </button>
             {openDropdown === "insurance" && (
               <div className="absolute top-full left-0 mt-2 bg-[#FDFCFA] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[320px] grid grid-cols-2 gap-1 animate-in fade-in slide-in-from-top-2 duration-200">
@@ -169,9 +170,9 @@ export function Navigation() {
             onMouseEnter={() => setOpenDropdown("partners")}
             onMouseLeave={() => setOpenDropdown(null)}
           >
-            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm">
+            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm" aria-haspopup="true" aria-expanded={openDropdown === "partners"}>
               {t("nav.partners")}
-              <ChevronDown className="w-4 h-4" />
+              <ChevronDown className="w-4 h-4" aria-hidden="true" />
             </button>
             {openDropdown === "partners" && (
               <div className="absolute top-full left-0 mt-2 bg-[#FDFCFA] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[250px] animate-in fade-in slide-in-from-top-2 duration-200">
@@ -197,9 +198,9 @@ export function Navigation() {
             onMouseEnter={() => setOpenDropdown("media")}
             onMouseLeave={() => setOpenDropdown(null)}
           >
-            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm">
+            <button className="text-primary font-semibold hover:text-secondary transition-colors flex items-center gap-1 text-sm" aria-haspopup="true" aria-expanded={openDropdown === "media"}>
               {t("nav.media")}
-              <ChevronDown className="w-4 h-4" />
+              <ChevronDown className="w-4 h-4" aria-hidden="true" />
             </button>
             {openDropdown === "media" && (
               <div className="absolute top-full left-0 mt-2 bg-[#FDFCFA] border border-[#C8A23A]/20 rounded-lg shadow-xl py-4 px-2 min-w-[280px] animate-in fade-in slide-in-from-top-2 duration-200">
@@ -231,6 +232,7 @@ export function Navigation() {
             variant="outline"
             size="sm"
             onClick={toggleLanguage}
+            aria-label={language === "ar" ? "تغيير اللغة إلى الإنجليزية" : "Switch language to Arabic"}
             className="border-primary text-primary bg-transparent hover:bg-secondary hover:text-primary hover:border-secondary"
           >
             {language === "ar" ? "EN" : "AR"}
@@ -266,14 +268,17 @@ export function Navigation() {
         <button
           className="lg:hidden text-primary"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label={isMobileMenuOpen ? (language === "ar" ? "إغلاق القائمة" : "Close menu") : (language === "ar" ? "فتح القائمة" : "Open menu")}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
         >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isMobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#FDFCFA] border-t border-[#C8A23A]/20 max-h-[calc(100vh-90px)] overflow-y-auto">
+        <div id="mobile-menu" className="lg:hidden bg-[#FDFCFA] border-t border-[#C8A23A]/20 max-h-[calc(100vh-90px)] overflow-y-auto" role="navigation" aria-label={language === "ar" ? "القائمة المحمولة" : "Mobile navigation"}>
           <div className="container py-4 space-y-4">
             <button
               className="block w-full text-right text-primary font-semibold hover:text-secondary py-2"

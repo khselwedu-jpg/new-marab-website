@@ -75,32 +75,37 @@ export function Footer() {
             <div className="flex gap-3 pt-2 flex-wrap">
               {facebook && (
                 <a href={facebook} target="_blank" rel="noopener noreferrer"
+                  aria-label={isAr ? "صفحتنا على فيسبوك" : "Our Facebook page"}
                   className="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary flex items-center justify-center transition-colors group">
-                  <Facebook className="w-5 h-5 text-primary group-hover:text-primary" />
+                  <Facebook className="w-5 h-5 text-primary group-hover:text-primary" aria-hidden="true" />
                 </a>
               )}
               {twitter && (
                 <a href={twitter} target="_blank" rel="noopener noreferrer"
+                  aria-label={isAr ? "صفحتنا على تويتر" : "Our Twitter page"}
                   className="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary flex items-center justify-center transition-colors group">
-                  <Twitter className="w-5 h-5 text-primary group-hover:text-primary" />
+                  <Twitter className="w-5 h-5 text-primary group-hover:text-primary" aria-hidden="true" />
                 </a>
               )}
               {instagram && (
                 <a href={instagram} target="_blank" rel="noopener noreferrer"
+                  aria-label={isAr ? "صفحتنا على إنستغرام" : "Our Instagram page"}
                   className="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary flex items-center justify-center transition-colors group">
-                  <Instagram className="w-5 h-5 text-primary group-hover:text-primary" />
+                  <Instagram className="w-5 h-5 text-primary group-hover:text-primary" aria-hidden="true" />
                 </a>
               )}
               {linkedin && (
                 <a href={linkedin} target="_blank" rel="noopener noreferrer"
+                  aria-label={isAr ? "صفحتنا على لينكدإين" : "Our LinkedIn page"}
                   className="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary flex items-center justify-center transition-colors group">
-                  <Linkedin className="w-5 h-5 text-primary group-hover:text-primary" />
+                  <Linkedin className="w-5 h-5 text-primary group-hover:text-primary" aria-hidden="true" />
                 </a>
               )}
               {youtube && (
                 <a href={youtube} target="_blank" rel="noopener noreferrer"
+                  aria-label={isAr ? "قناتنا على يوتيوب" : "Our YouTube channel"}
                   className="w-10 h-10 rounded-full bg-primary/10 hover:bg-secondary flex items-center justify-center transition-colors group">
-                  <Youtube className="w-5 h-5 text-primary group-hover:text-primary" />
+                  <Youtube className="w-5 h-5 text-primary group-hover:text-primary" aria-hidden="true" />
                 </a>
               )}
               {/* Fallback icons when no settings yet */}

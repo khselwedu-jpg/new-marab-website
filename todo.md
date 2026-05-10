@@ -213,3 +213,11 @@
 - [x] Shareholders page: capital card (title, amount, description) dynamic from admin via site_settings
 - [x] About Us page: intro text, history, values, commitments, statistics dynamic from admin
 - [x] Admin: add AboutUs section to SiteSettings for managing about page content
+
+## Lighthouse Optimization - Target 90+ in All Categories
+- [x] Phase 1 - Audit: Run Lighthouse audit to identify issues
+- [x] Phase 2 - Performance: Add meta tags, OG/Twitter cards, structured data (JSON-LD), preload hints, canonical URL to index.html
+- [x] Phase 3 - Accessibility: Add ARIA labels to nav element, dropdown buttons (aria-haspopup, aria-expanded), language toggle, mobile menu button (aria-expanded, aria-controls), mobile menu div (id, role), social media links (aria-label), icon aria-hidden
+- [x] Phase 4 - SEO: Create robots.txt (disallow /admin, /api), create sitemap.xml with all main routes
+- [x] Phase 5 - Best Practices: Verified no console errors, all external resources use HTTPS, favicon present
+- [ ] Phase 6 - Checkpoint & Deploy: Save checkpoint, build Namecheap package, push to GitHub
